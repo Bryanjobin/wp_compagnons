@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/becmaweb/compagnonswp.becmaweb.ca/wp-content/
+    - /bin/cp -R /home/becmaweb/repositories/wp_compagnons/* $DEPLOYPATH
