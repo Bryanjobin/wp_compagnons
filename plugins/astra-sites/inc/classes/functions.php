@@ -25,7 +25,7 @@ if ( ! function_exists( 'astra_sites_error_log' ) ) :
 			}
 
 			if ( apply_filters( 'astra_sites_debug_logs', false ) ) {
-				error_log( $message ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				error_log( $message ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- This is for the debug logs while importing. This is conditional and will not be logged in the debug.log file for normal users.
 			}
 		}
 	}
@@ -126,7 +126,7 @@ function astra_sites_is_valid_url( $url = '' ) {
 function astra_sites_get_reset_post_data() {
 	global $wpdb;
 
-	$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
+	$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- We need this to get all the posts and pages. Traditional WP_Query would have been expensive here.
 
 	return $post_ids;
 }
@@ -140,7 +140,7 @@ function astra_sites_get_reset_post_data() {
 function astra_sites_get_reset_form_data() {
 	global $wpdb;
 
-	$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
+	$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- We need this to get all the WP forms. Traditional WP_Query would have been expensive here.
 
 	return $form_ids;
 }
@@ -154,7 +154,7 @@ function astra_sites_get_reset_form_data() {
 function astra_sites_get_reset_term_data() {
 	global $wpdb;
 
-	$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );
+	$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- We need this to get all the terms and taxonomy. Traditional WP_Query would have been expensive here.
 
 	return $term_ids;
 }
@@ -208,4 +208,31 @@ function astra_sites_empty_post_excerpt( $post_id = 0 ) {
 			'post_excerpt' => '',
 		)
 	);
+}
+
+/**
+ * Get the WP Forms URL.
+ * 
+ * @since 3.2.4
+ * @param int $id  The template ID.
+ * @return string
+ */
+function astra_sites_get_wp_forms_url( $id ) {
+	$demo_data = get_option( 'astra_sites_import_elementor_data_' . $id, array() );
+	if ( empty( $demo_data ) ) {
+		return '';
+	}
+
+	if ( isset( $demo_data['type'] ) ) {
+		$type = $demo_data['type'];
+		if ( 'site-pages' === $type && isset( $demo_data['astra-site-wpforms-path'] ) ) {
+			return $demo_data['astra-site-wpforms-path'];
+		}
+
+		if ( 'astra-blocks' === $type && isset( $demo_data['post-meta'] ) ) {
+			return $demo_data['post-meta']['astra-site-wpforms-path'];
+		}
+	}
+
+	return '';
 }

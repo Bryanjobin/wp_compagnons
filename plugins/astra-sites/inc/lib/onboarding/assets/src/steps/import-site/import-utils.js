@@ -140,7 +140,7 @@ export const checkRequiredPlugins = async ( storedState ) => {
 		.then( ( response ) => response.json() )
 		.then( ( response ) => {
 			if ( response.success ) {
-				const rPlugins = response.data.required_plugins;
+				const rPlugins = response.data?.required_plugins;
 				const notInstalledPlugin = rPlugins.notinstalled || '';
 				const notActivePlugins = rPlugins.inactive || '';
 				dispatch( {
@@ -175,6 +175,7 @@ export const installAstra = ( storedState ) => {
 
 		wp.updates.installTheme( {
 			slug: themeSlug,
+			ajax_nonce: astraSitesVars._ajax_nonce,
 		} );
 
 		// eslint-disable-next-line no-undef

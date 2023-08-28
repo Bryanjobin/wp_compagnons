@@ -57,6 +57,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			add_action( 'wp_ajax_astra-sites-import-wpforms', array( $this, 'import_wpforms' ) );
 			add_action( 'wp_ajax_astra-sites-import-cartflows', array( $this, 'import_cartflows' ) );
 			add_action( 'wp_ajax_astra-sites-import-spectra-settings', array( $this, 'import_spectra_settings' ) );
+			add_action( 'wp_ajax_astra-sites-import-surecart-settings', array( $this, 'import_surecart_settings' ) );
 			add_action( 'wp_ajax_astra-sites-import-customizer-settings', array( $this, 'import_customizer_settings' ) );
 			add_action( 'wp_ajax_astra-sites-import-prepare-xml', array( $this, 'prepare_xml_data' ) );
 			add_action( 'wp_ajax_astra-sites-import-options', array( $this, 'import_options' ) );
@@ -84,7 +85,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			add_action( 'wp_ajax_astra-sites-delete-terms', array( $this, 'delete_imported_terms' ) );
 
 			if ( version_compare( get_bloginfo( 'version' ), '5.1.0', '>=' ) ) {
-				add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 );
+				add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 ); //phpcs:ignore WordPressVIPMinimum.Hooks.RestrictedHooks.http_request_timeout -- We need this to avoid timeout on slow servers while installing theme, plugin etc.
 			}
 
 			add_action( 'init', array( $this, 'disable_default_woo_pages_creation' ), 2 );
@@ -111,7 +112,12 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 * @return array $options The options.
 		 */
 		public function plugin_install_clear_directory( $options ) {
-			if ( isset( $_REQUEST['clear_destination'] ) && 'true' === $_REQUEST['clear_destination'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( true !== astra_sites_has_import_started() ) {
+				return $options;
+			}
+			// Verify Nonce.
+			check_ajax_referer( 'astra-sites', 'ajax_nonce' );
+			if ( isset( $_REQUEST['clear_destination'] ) && 'true' === $_REQUEST['clear_destination'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- This is a callback filter while performing plugin install action - https://developer.wordpress.org/reference/hooks/upgrader_package_options/, We don't quite have access to the nonce here. We are skipping it here.
 				$options['clear_destination'] = true;
 			}
 
@@ -211,7 +217,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				}
 			}
 
-			$wpforms_url = ( isset( $_REQUEST['wpforms_url'] ) ) ? urldecode( $_REQUEST['wpforms_url'] ) : $wpforms_url;
+			$screen = ( isset( $_REQUEST['screen'] ) ) ? sanitize_text_field( $_REQUEST['screen'] ) : '';
+			$id = ( isset( $_REQUEST['id'] ) ) ? absint( $_REQUEST['id'] ) : '';
+
+			$wpforms_url = ( 'elementor' === $screen ) ? astra_sites_get_wp_forms_url( $id ) : astra_get_site_data( 'astra-site-wpforms-path' );
 			$ids_mapping = array();
 
 			if ( ! astra_sites_is_valid_url( $wpforms_url ) ) {
@@ -303,6 +312,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 * @return void
 		 */
 		public function import_cartflows( $url = '' ) {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error();
+			}
 			// Disable CartFlows import logging.
 			add_filter( 'cartflows_enable_log', '__return_false' );
 
@@ -312,7 +325,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			add_action( 'cartflows_step_imported', array( $this, 'track_flows' ) );
 			add_filter( 'cartflows_enable_imported_content_processing', '__return_false' );
 
-			$url = ( isset( $_REQUEST['cartflows_url'] ) ) ? urldecode( $_REQUEST['cartflows_url'] ) : urldecode( $url ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$url = astra_get_site_data( 'astra-site-cartflows-path' );
 			if ( ! empty( $url ) && is_callable( 'CartFlows_Importer::get_instance' ) ) {
 
 				// Download JSON file.
@@ -338,6 +351,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				} else {
 					wp_send_json_error( __( 'There was an error downloading the CartFlows flows file.', 'astra-sites' ) );
 				}
+			} else {
+				wp_send_json_error( __( 'Empty file for CartFlows flows', 'astra-sites' ) );
 			}
 
 			if ( defined( 'WP_CLI' ) ) {
@@ -357,7 +372,11 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 */
 		public function import_spectra_settings( $url = '' ) {
 
-			$url = ( isset( $_REQUEST['spectra_settings'] ) ) ? urldecode( $_REQUEST['spectra_settings'] ) : urldecode( $url ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error();
+			}
+			$url = astra_get_site_data( 'astra-site-spectra-settings' );
 			if ( ! astra_sites_is_valid_url( $url ) ) {
 				/* Translators: %s is XML URL. */
 				wp_send_json_error( sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $url ) );
@@ -391,10 +410,43 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			}
 
 			if ( defined( 'WP_CLI' ) ) {
-				WP_CLI::line( 'Imported from ' . $url );
+				WP_CLI::line( 'Imported Spectra settings from ' . $url );
 			} elseif ( wp_doing_ajax() ) {
 				wp_send_json_success( $url );
 			}
+		}
+		/**
+		 * Import Surecart Settings
+		 *
+		 * @since 3.3.0
+		 * @return void
+		 */
+		public function import_surecart_settings() {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
+			}
+			$id = isset( $_POST['source_id'] ) ? base64_decode( sanitize_text_field( $_POST['source_id'] ) ) : '';
+			if ( is_callable( 'SureCart\Models\ProvisionalAccount::create' ) && '' !== $id ) {
+				$currency = isset( $_POST['source_currency'] ) ? sanitize_text_field( $_POST['source_currency'] ) : 'usd';
+				$token = \SureCart\Models\ApiToken::get();
+				if ( ! empty( $token ) ) {
+					\SureCart\Models\ApiToken::clear();
+				}
+				$result = SureCart\Models\ProvisionalAccount::create(
+					array(
+						'account_currency'  => $currency, // It will default to USD.
+						'account_name'      => '', // if you do not pass this it will default to the site name.
+						'account_url'       => '', // if you do not pass this it will default to the site url.
+						'email'             => '', // optional.
+						'source_account_id' => $id,
+					)
+				);
+				if ( ! is_wp_error( $result ) ) {
+					wp_send_json_success( 'success' );
+				}           
+			}
+			wp_send_json_error( __( 'There was an error cloning the surecart store.', 'astra-sites' ) );
 		}
 
 		/**
@@ -464,7 +516,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				wp_send_json_error( __( 'The XMLReader library is not available. This library is required to import the content for the website.', 'astra-sites' ) );
 			}
 
-			$wxr_url = ( isset( $_REQUEST['wxr_url'] ) ) ? urldecode( $_REQUEST['wxr_url'] ) : '';
+			$wxr_url = astra_get_site_data( 'astra-site-wxr-path' );
 
 			if ( ! astra_sites_is_valid_url( $wxr_url ) ) {
 				/* Translators: %s is XML URL. */
@@ -579,7 +631,9 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				}
 			}
 
-			$widgets_data = ( isset( $_POST['widgets_data'] ) ) ? (object) json_decode( stripslashes( $_POST['widgets_data'] ) ) : (object) $widgets_data;
+			$data = astra_get_site_data( 'astra-site-widgets-data' );
+
+			$widgets_data = ( isset( $data ) ) ? (object) json_decode( $data ) : (object) $widgets_data;
 
 			if ( ! empty( $widgets_data ) ) {
 
@@ -764,7 +818,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			$this->update_latest_checksums();
 
 			// Flush permalinks.
-			flush_rewrite_rules();
+			flush_rewrite_rules(); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules -- This function is called only after import is completed
 		}
 
 		/**
@@ -777,7 +831,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 */
 		public function update_latest_checksums() {
 			$latest_checksums = get_site_option( 'astra-sites-last-export-checksums-latest', '' );
-			update_site_option( 'astra-sites-last-export-checksums', $latest_checksums, 'no' );
+			update_site_option( 'astra-sites-last-export-checksums', $latest_checksums );
 		}
 
 		/**

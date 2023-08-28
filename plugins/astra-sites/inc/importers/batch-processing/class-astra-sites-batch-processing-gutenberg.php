@@ -91,12 +91,13 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 
 			Astra_Sites_Importer_Log::add( '---- Processing WordPress Posts / Pages - for "Gutenberg" ----' );
 
-			$post_types = apply_filters( 'astra_sites_gutenberg_batch_process_post_types', array( 'page', 'wp_block' ) );
+			$post_types = apply_filters( 'astra_sites_gutenberg_batch_process_post_types', array( 'page', 'wp_block', 'wp_template', 'wp_navigation', 'wp_template_part', 'wp_global_styles', 'sc_form' ) );
 			if ( defined( 'WP_CLI' ) ) {
 				WP_CLI::line( 'For post types: ' . implode( ', ', $post_types ) );
 			}
 
 			$post_ids = Astra_Sites_Batch_Processing::get_pages( $post_types );
+			
 			if ( empty( $post_ids ) && ! is_array( $post_ids ) ) {
 				return;
 			}
@@ -140,13 +141,12 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 
 			// Post content.
 			$content = get_post_field( 'post_content', $post_id );
-
 			// Empty mapping? Then return.
 			if ( ! empty( $ids_mapping ) ) {
 				// Replace ID's.
 				foreach ( $ids_mapping as $old_id => $new_id ) {
-					$content = str_replace( '[wpforms id="' . $old_id, '[wpforms id="' . $new_id, $content );
-					$content = str_replace( '{"formId":"' . $old_id . '"}', '{"formId":"' . $new_id . '"}', $content );
+					$content = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $content );
+					$content = str_replace( '{\"formId\":\"' . $old_id . '\"}', '{\"formId\":\"' . $new_id . '\"}', $content );
 				}
 			}
 
@@ -184,7 +184,6 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 			// @todo This affect for normal page content too. Detect only Gutenberg pages and process only on it.
 			// $content = str_replace( '&amp;', "\u0026amp;", $content );
 			$content = $this->get_content( $content );
-
 			// Update content.
 			wp_update_post(
 				array(

@@ -6,3 +6,19 @@ Version: 1.0
 
 
 */
+
+@import url(./css/_variables.css);
+@import url(./css/_fonts.css);
+@import url(./css/_text-styles.css);
+@import url(./css/_button-styles.css);
+@import url(./css/_header.css);
+@import url(./css/_main.css);
+@import url(./css/_footer.css);
+@import url(./css/_simpliquer.css);
+@import url(./css/_simpliquer-form.css);
+@import url(./css/_artistes.css);
+@import url(./css/_accueil_rdv.css);
+@import url(./css/_equipe_festival.css);
+@import url(./css/_accueil.css);
+@import url(./css/_la_bavarde.css);
+@import url(./css/_festival_responsable.css);

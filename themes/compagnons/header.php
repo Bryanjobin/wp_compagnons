@@ -5,12 +5,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <?php wp_head(); ?>
-</head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/style.css">
+        <script src="./js/main.js" defer></script>
+        <script src="./js/classes/_header.js" defer></script>
+        <script src="./js/accueil_rdv.js" defer></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <title>Document</title>
+        <?php  wp_head(); ?>
+    </head>
 <body>
 <header>
-        <!-- <div class="m_header">
+        <div class="m_header">
             <div class="m_header_top">
                 <img class="m_header_top_logo" src="./images/logo.png" alt="Logo Les Compagnons de la mise en valeur du patrimoine vivant">
                 <button class="m_header_top_hamburger"><span class="material-symbols-outlined m_header_top_hamburger_icon">menu</span></button>
@@ -106,24 +117,19 @@
 
                 </div>
             </div>
-        </div> -->
+        </div>
         <div class="header_container">
             <div class="top_nav">
-                <!-- <img class="top_nav_logo" src="./images/logo.png" alt="Logo Les Compagnons de la mise en valeur du patrimoine vivant"> -->
+                <img class="top_nav_logo" src="./images/logo.png" alt="Logo Les Compagnons de la mise en valeur du patrimoine vivant">
                 <div class="top_nav_menu">
-                    <?php 
-                    wp_nav_menu($arg = array (
-                        'menu' => 'top_nav_menu'
-                    ));
-                    ?>
-                    <!-- <a href="https://www.google.com/" target="_blank">Événements à venir</a>
+                    <a href="https://www.google.com/" target="_blank">Événements à venir</a>
                     <a href="https://www.google.com/" target="_blank">Acheter des billets</a>
                     <a href="https://www.google.com/" target="_blank">Contact</a>
                     <a href="https://www.google.com/" target="_blank">À propos</a>
-                    <a href="https://www.google.com/" target="_blank">FAQ</a>  -->
+                    <a href="https://www.google.com/" target="_blank">FAQ</a> 
                 </div>
             </div>
-            <!-- <div class="bottom_nav_container">
+            <div class="bottom_nav_container">
                 <nav class="bottom_nav">
                     <div class="bottom_nav_menu">
                         <button class="bottom_nav_menu_btn bg_compagnons compBtn">
@@ -181,6 +187,6 @@
                         </button>
                     </div>
                 </nav>
-            </div> -->
+            </div>
         </div>
-</header>
+    </header>

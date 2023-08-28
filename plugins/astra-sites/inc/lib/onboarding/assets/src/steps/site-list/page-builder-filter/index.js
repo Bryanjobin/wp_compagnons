@@ -1,13 +1,15 @@
 import React from 'react';
-import { __ } from '@wordpress/i18n';
 import { ToggleDropdown } from '@brainstormforce/starter-templates-components';
+import { __ } from '@wordpress/i18n';
 import { useStateValue } from '../../../store/store';
 import { initialState } from '../../../store/reducer';
 const { imageDir, isBrizyEnabled } = starterTemplates;
 
 const PageBuilder = () => {
 	const [ { builder }, dispatch ] = useStateValue();
-
+	if ( builder === 'fse' ) {
+		return null;
+	}
 	const buildersList = [
 		{
 			id: 'gutenberg',
