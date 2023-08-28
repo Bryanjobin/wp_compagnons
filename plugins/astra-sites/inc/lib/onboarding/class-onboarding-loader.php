@@ -80,7 +80,7 @@ class Intelligent_Starter_Templates_Loader {
 	 * @since 3.0.0-beta.1
 	 */
 	public function menu_callback() {
-		$current_slug = isset( $_GET['action'] ) ? esc_attr( $_GET['action'] ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$current_slug = isset( $_GET['action'] ) ? esc_attr( $_GET['action'] ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Fetching a $_GET value, no nonce available to validate.
 		$active_tab   = str_replace( '_', '-', $current_slug );
 		if ( 'site-import' === $current_slug ) {
 			Astra_Sites_Page::get_instance()->init_nav_menu( $active_tab );
@@ -102,7 +102,7 @@ class Intelligent_Starter_Templates_Loader {
 	 * @param string $classes Space separated class string.
 	 */
 	public function admin_body_class( $classes = '' ) {
-		$onboarding_class = isset( $_GET['page'] ) && 'starter-templates' === $_GET['page'] ? 'intelligent-starter-templates-onboarding' : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$onboarding_class = isset( $_GET['page'] ) && 'starter-templates' === $_GET['page'] ? 'intelligent-starter-templates-onboarding' : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Fetching a $_GET value, no nonce available to validate.
 		$classes .= ' ' . $onboarding_class . ' ';
 
 		return $classes;
@@ -188,6 +188,14 @@ class Intelligent_Starter_Templates_Loader {
 			), site_url( '/' )
 		);
 
+		$spectraTheme = 'not-installed';
+		$themeStatus = Astra_Sites::get_instance()->get_theme_status();
+		// Theme installed and activate.
+		if ( 'spectra-one' === get_option( 'stylesheet', 'astra' ) ) {
+			$spectraTheme = 'installed-and-active';
+			$themeStatus = 'installed-and-active';
+		}
+
 		$data = array(
 			'imageDir' => INTELLIGENT_TEMPLATES_URI . 'assets/images/',
 			'URI' => INTELLIGENT_TEMPLATES_URI,
@@ -197,7 +205,8 @@ class Intelligent_Starter_Templates_Loader {
 			'demoId' => 0,
 			'skipImport' => false,
 			'adminEmail' => $current_user->user_email,
-			'themeStatus' => Astra_Sites::get_instance()->get_theme_status(),
+			'themeStatus' => $themeStatus,
+			'spectraTheme' => $spectraTheme,
 			'nonce' => wp_create_nonce( 'astra-sites-set-ai-site-data' ),
 			'restNonce' => wp_create_nonce( 'wp_rest' ),
 			'retryTimeOut' => 5000, // 10 Seconds.

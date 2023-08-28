@@ -1,14 +1,26 @@
 <?php
 
+/**
+ *
+ * @package   Duplicator
+ * @copyright (c) 2023, Snap Creek LLC
+ */
+
+use Duplicator\Controllers\WelcomeController;
+
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
 
 /**
  * Upgrade/Install logic of plugin resides here
- *
  */
 class DUP_LITE_Plugin_Upgrade
 {
     const DUP_VERSION_OPT_KEY = 'duplicator_version_plugin';
+
+    /**
+     * version starting from which the welcome page is shown
+     */
+    const DUP_WELCOME_PAGE_VERSION = '1.5.3';
 
     /**
      * wp_options key containing info about when the plugin was activated
@@ -28,6 +40,7 @@ class DUP_LITE_Plugin_Upgrade
         } else {
             self::updateInstallation($oldDupVersion);
         }
+        DUP_Settings::Save();
 
         self::setActivatedTime();
 
@@ -59,6 +72,7 @@ class DUP_LITE_Plugin_Upgrade
     {
         //WordPress Options Hooks
         update_option(self::DUP_VERSION_OPT_KEY, DUPLICATOR_VERSION);
+        update_option(WelcomeController::REDIRECT_OPT_KEY, true);
     }
 
     /**
@@ -74,9 +88,7 @@ class DUP_LITE_Plugin_Upgrade
         //Do not update to new wp-content storage till after
         if (version_compare($oldVersion, '1.3.35', '<')) {
             DUP_Settings::Set('storage_position', DUP_Settings::STORAGE_POSITION_LEGACY);
-            DUP_Settings::Save();
         }
-
         //WordPress Options Hooks
         update_option(self::DUP_VERSION_OPT_KEY, DUPLICATOR_VERSION);
     }

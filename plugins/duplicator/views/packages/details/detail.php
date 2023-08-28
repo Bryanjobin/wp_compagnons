@@ -1,7 +1,7 @@
 <?php
 
 use Duplicator\Libs\Snap\SnapJson;
-use Duplicator\Libs\Upsell;
+use Duplicator\Utils\Upsell;
 
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
 $view_state     = DUP_UI_ViewState::getArray();
@@ -250,7 +250,8 @@ DIALOG: QUICK PATH -->
         <i style='font-size:11px'>
             <?php
                 printf(
-                    "%s <a href='https://snapcreek.com/duplicator/docs/faqs-tech/#faq-trouble-052-q' target='_blank'>%s</a>",
+                    "%s <a href='" . DUPLICATOR_DOCS_URL . "how-to-work-with-daf-files-and-the-duparchive-extraction-tool' "
+                    . "target='_blank'>%s</a>",
                     esc_html__("A copy of the database.sql and installer.php files can both be found inside of the archive.zip/daf file.  "
                         . "Download and extract the archive file to get a copy of the installer which will be named 'installer-backup.php'. "
                         . "For details on how to extract a archive.daf file please see: ", 'duplicator'),

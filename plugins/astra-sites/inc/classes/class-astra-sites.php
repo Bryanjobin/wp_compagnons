@@ -144,8 +144,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra-sites-reset-terms-and-forms' => 'reset_terms_and_forms',
 				'astra-sites-reset-posts' => 'reset_posts',
 				'astra-sites-activate-theme' => 'activate_theme',
-				'astra-sites-create-page' => 'create_page',
-				'astra-sites-import-media' => 'import_media',
 				'astra-sites-create-template' => 'create_template',
 				'astra-sites-create-image' => 'create_image',
 				'astra-sites-get-deleted-post-ids' => 'get_deleted_post_ids',
@@ -153,7 +151,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra-sites-getting-started-notice' => 'getting_started_notice',
 				'astra-sites-favorite' => 'add_to_favorite',
 				'astra-sites-api-request' => 'api_request',
-				'astra-sites-remote-request' => 'remote_request',
+				'astra-sites-elementor-api-request' => 'elementor_api_request',
+				'astra-sites-elementor-flush-request' => 'elementor_flush_request',
 				'astra-page-elementor-insert-page' => 'elementor_process_import_for_page',
 				'astra-sites-update-subscription' => 'update_subscription',
 				'astra-sites-update-analytics' => 'update_analytics',
@@ -190,7 +189,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public function is_starter_templates_request() {
 
-			if ( isset( $_REQUEST['action'] ) && in_array( $_REQUEST['action'], array_keys( $this->ajax ), true ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( isset( $_REQUEST['action'] ) && in_array( $_REQUEST['action'], array_keys( $this->ajax ), true ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Fetching GET parameter, no nonce associated with this action.
 				return true;
 			}
 
@@ -279,7 +278,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
 			}
 
-			$arguments = isset( $_POST['data'] ) ? array_map( 'sanitize_text_field', json_decode( stripslashes( $_POST['data'] ), true ) ) : array();
+			$arguments = isset( $_POST['data'] ) ? array_map( 'sanitize_text_field', json_decode( stripslashes( $_POST['data'] ), true ) ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Already sanitized using `array_map` and `sanitize_text_field`.
 
 			// Page Builder mapping.
 			$page_builder_mapping      = array(
@@ -401,7 +400,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
-			// @codingStandardsIgnoreStart
 			$saved_images     = get_option( 'astra-sites-saved-images', array() );
 			$astra_image_flag = get_post_meta( $id, 'astra-images', true );
 			$astra_image_flag = (int) $astra_image_flag;
@@ -415,7 +413,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$saved_images = array_diff( $saved_images, $flag_arr );
 				update_option( 'astra-sites-saved-images', $saved_images, 'no' );
 			}
-			// @codingStandardsIgnoreEnd
 		}
 
 		/**
@@ -431,7 +428,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				||
 				(
 					class_exists( 'Brizy_Editor_Post' ) && // Brizy Builder is on?
-					( isset( $_GET['brizy-edit'] ) || isset( $_GET['brizy-edit-iframe'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					( isset( $_GET['brizy-edit'] ) || isset( $_GET['brizy-edit-iframe'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Fetching GET parameter, no nonce associated with this action.
 				)
 				||
 				is_customize_preview() // Is customizer on?
@@ -455,7 +452,16 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 			}
 
-			$api_url = isset( $_POST['url'] ) ? esc_url_raw( $_POST['url'] ) : '';
+			$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+
+			$demo_data = get_option( 'astra_sites_import_elementor_data_' . $id, array() );
+
+			if ( 'astra-blocks' == $type ) {
+				$api_url = trailingslashit( self::get_instance()->get_api_domain() ) . 'wp-json/wp/v2/' . $type . '/' . $id;
+			} else {
+				$api_url = $demo_data['astra-page-api-url'];
+			}
 
 			if ( ! astra_sites_is_valid_url( $api_url ) ) {
 				wp_send_json_error( __( 'Invalid API URL.', 'astra-sites' ) );
@@ -474,7 +480,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 
 			$meta    = json_decode( $data['post-meta']['_elementor_data'], true );
-			$post_id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+			$post_id = isset( $_POST['id'] ) ? absint( sanitize_key( $_POST['id'] ) ) : '';
 
 			if ( empty( $post_id ) || empty( $meta ) ) {
 				wp_send_json_error( __( 'Invalid Post ID or Elementor Meta', 'astra-sites' ) );
@@ -487,37 +493,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$import      = new \Elementor\TemplateLibrary\Astra_Sites_Elementor_Pages();
 			$import_data = $import->import( $post_id, $meta );
 
+			delete_option( 'astra_sites_import_elementor_data_' . $id );
 			wp_send_json_success( $import_data );
-		}
-
-		/**
-		 * Elementor Templates Request
-		 *
-		 * @since 2.7.3
-		 */
-		public function remote_request() {
-
-			// Verify Nonce.
-			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
-
-			if ( ! current_user_can( 'edit_posts' ) ) {
-				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
-			}
-
-			$api_url = isset( $_POST['url'] ) ? sanitize_text_field( $_POST['url'] ) : '';
-
-			$api_url = add_query_arg( astra_sites_get_api_params(), $api_url );
-
-			$response = wp_remote_get( $api_url );
-
-			if ( is_wp_error( $response ) ) {
-				wp_send_json_error( wp_remote_retrieve_body( $response ) );
-			}
-
-			$body = wp_remote_retrieve_body( $response );
-			$data = json_decode( $body, true );
-
-			wp_send_json_success( $data );
 		}
 
 		/**
@@ -530,7 +507,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
 
-			$url = isset( $_POST['url'] ) ? sanitize_text_field( $_POST['url'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error();
+			}
+
+			$url = isset( $_POST['url'] ) ? sanitize_text_field( $_POST['url'] ) : '';
 
 			if ( empty( $url ) ) {
 				wp_send_json_error(
@@ -564,7 +545,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$api_args = apply_filters(
 				'astra_sites_api_args', array(
-					'timeout' => 30,
+					'timeout' => 15,
 				)
 			);
 
@@ -631,6 +612,142 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
+		 * API Request
+		 *
+		 * @since 3.2.4
+		 */
+		public function elementor_api_request() {
+
+			// Verify Nonce.
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error();
+			}
+
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+			$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
+
+			if ( empty( $id ) || empty( $type ) ) {
+				wp_send_json_error(
+					array(
+						'message' => __( 'Provided API details are empty! Please try again!', 'astra-sites' ),
+						'code'    => 'Error',
+					)
+				);
+			}
+
+			$api_args = apply_filters(
+				'astra_sites_api_params', array(
+					'url' => site_url(),
+					'version' => ASTRA_SITES_VER,
+				)
+			);
+
+			$api_url = add_query_arg( $api_args, trailingslashit( self::get_instance()->get_api_domain() ) . 'wp-json/wp/v2/' . $type . '/' . $id );
+
+			if ( ! astra_sites_is_valid_url( $api_url ) ) {
+				wp_send_json_error(
+					array(
+						/* Translators: %s is API URL. */
+						'message' => sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $api_url ),
+						'code'    => 'Error',
+					)
+				);
+			}
+
+			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
+
+			$api_args = apply_filters(
+				'astra_sites_api_args', array(
+					'timeout' => 15,
+				)
+			);
+
+			$request = wp_remote_get( $api_url, $api_args );
+
+			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
+
+			if ( is_wp_error( $request ) ) {
+				$wp_error_code = $request->get_error_code();
+				switch ( $wp_error_code ) {
+					case 'http_request_not_executed':
+						/* translators: %s Error Message */
+						$message = sprintf( __( 'API Request could not be performed - %s', 'astra-sites' ), $request->get_error_message() );
+						break;
+					case 'http_request_failed':
+					default:
+						/* translators: %s Error Message */
+						$message = sprintf( __( 'API Request has failed - %s', 'astra-sites' ), $request->get_error_message() );
+						break;
+				}
+
+				wp_send_json_error(
+					array(
+						'message'       => $request->get_error_message(),
+						'code'          => 'WP_Error',
+						'response_code' => $wp_error_code,
+					)
+				);
+			}
+
+			$code      = (int) wp_remote_retrieve_response_code( $request );
+			$demo_data = json_decode( wp_remote_retrieve_body( $request ), true );
+
+			if ( 200 === $code ) {
+				update_option( 'astra_sites_import_elementor_data_' . $id, $demo_data, 'no' );
+				wp_send_json_success( $demo_data );
+			}
+
+			$message       = wp_remote_retrieve_body( $request );
+			$response_code = $code;
+
+			if ( 200 !== $code && is_array( $demo_data ) && isset( $demo_data['code'] ) ) {
+				$message = $demo_data['message'];
+			}
+
+			if ( 500 === $code ) {
+				$message = __( 'Internal Server Error.', 'astra-sites' );
+			}
+
+			if ( 200 !== $code && false !== strpos( $message, 'Cloudflare' ) ) {
+				$ip = Astra_Sites_Helper::get_client_ip();
+				/* translators: %s IP address. */
+				$message = sprintf( __( 'Client IP: %1$s </br> Error code: %2$s', 'astra-sites' ), $ip, $code );
+				$code    = 'Cloudflare';
+			}
+
+			wp_send_json_error(
+				array(
+					'message'       => $message,
+					'code'          => $code,
+					'response_code' => $response_code,
+				)
+			);
+		}
+
+		/**
+		 * API Flush Request
+		 *
+		 * @since 3.2.4
+		 */
+		public function elementor_flush_request() {
+
+			// Verify Nonce.
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error();
+			}
+
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+
+			delete_option( 'astra_sites_import_elementor_data_' . $id );
+
+			wp_send_json_success();
+		}
+
+		/**
 		 * Insert Template
 		 *
 		 * @return void
@@ -653,7 +770,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				||
 				(
 					class_exists( 'Brizy_Editor_Post' ) && // Brizy Builder is on?
-					( isset( $_GET['brizy-edit'] ) || isset( $_GET['brizy-edit-iframe'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					( isset( $_GET['brizy-edit'] ) || isset( $_GET['brizy-edit-iframe'] ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Fetching GET parameter, no nonce associated with this action.
 				)
 			) {
 				// Image Search Templates.
@@ -701,7 +818,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$new_favorites = $favorite_settings;
 			}
 
-			if ( 'false' === $_POST['is_favorite'] ) {
+			$is_favorite = isset( $_POST['is_favorite'] ) ? sanitize_key( $_POST['is_favorite'] ) : '';
+
+			if ( 'false' === $is_favorite ) {
 				if ( in_array( $site_id, $new_favorites, true ) ) {
 					$key = array_search( $site_id, $new_favorites, true );
 					unset( $new_favorites[ $key ] );
@@ -735,26 +854,51 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 			}
 
-			$content = isset( $_POST['data']['content']['rendered'] ) ? $_POST['data']['content']['rendered'] : '';
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+			$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
+			$demo_data = get_option( 'astra_sites_import_elementor_data_' . $id, array() );
+			
+			if ( 'astra-blocks' == $type ) {
+				$url = trailingslashit( self::get_instance()->get_api_domain() ) . 'wp-json/wp/v2/' . $type . '/' . $id;
+			} else {
+				$url = $demo_data['astra-page-api-url'];
+			}
 
-			$data = isset( $_POST['data'] ) ? $_POST['data'] : array();
+			$api_url = add_query_arg(
+				array(
+					'site_url' => site_url(),
+					'version' => ASTRA_SITES_VER,
+				), $url
+			);
+
+			if ( ! astra_sites_is_valid_url( $api_url ) ) {
+				wp_send_json_error( __( 'Invalid API URL.', 'astra-sites' ) );
+			}
+
+			$response = wp_remote_get( $api_url );
+
+			if ( is_wp_error( $response ) || 200 !== $response['response']['code'] ) {
+				wp_send_json_error( wp_remote_retrieve_body( $response ) );
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			$data = json_decode( $body, true );
 
 			if ( empty( $data ) ) {
 				wp_send_json_error( 'Empty page data.' );
 			}
 
-			$page_id = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
+			$content = isset( $data['content']['rendered'] ) ? $data['content']['rendered'] : '';
+
+			$page_id = isset( $data['id'] ) ? sanitize_text_field( $data['id'] ) : '';
 
 			$title = '';
-			if ( isset( $_POST['data']['title']['rendered'] ) ) {
-				if ( '' !== $_POST['title'] ) {
-					$title = $_POST['title'] . ' - ' . $_POST['data']['title']['rendered'];
-				} else {
-					$title = $_POST['data']['title']['rendered'];
-				}
+			$rendered_title = isset( $data['title']['rendered'] ) ? sanitize_text_field( $data['title']['rendered'] ) : '';
+			if ( isset( $rendered_title ) ) {
+				$title = ( isset( $_POST['title'] ) && '' !== $_POST['title'] ) ? sanitize_text_field( $_POST['title'] ) . ' - ' . $rendered_title : $rendered_title;
 			}
 
-			$excerpt = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
+			$excerpt = isset( $data['excerpt']['rendered'] ) ? sanitize_text_field( $data['excerpt']['rendered'] ) : '';
 
 			$post_args = array(
 				'post_type'    => 'elementor_library',
@@ -766,128 +910,22 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$new_page_id = wp_insert_post( $post_args );
 			update_post_meta( $new_page_id, '_astra_sites_enable_for_batch', true );
-			$post_meta = isset( $_POST['data']['post-meta'] ) ? $_POST['data']['post-meta'] : array();
+			$post_meta = isset( $data['post-meta'] ) ? $data['post-meta'] : array();
 
 			if ( ! empty( $post_meta ) ) {
 				$this->import_template_meta( $new_page_id, $post_meta );
 			}
 
-			if ( 'pages' === $_POST['type'] ) {
-				update_post_meta( $new_page_id, '_elementor_template_type', 'page' );
-				wp_set_object_terms( $new_page_id, 'page', 'elementor_library_type' );
-			} else {
-				update_post_meta( $new_page_id, '_elementor_template_type', 'section' );
-				wp_set_object_terms( $new_page_id, 'section', 'elementor_library_type' );
-			}
+			$term_value = ( 'pages' === $type ) ? 'page' : 'section';
+			update_post_meta( $new_page_id, '_elementor_template_type', $term_value );
+			wp_set_object_terms( $new_page_id, $term_value, 'elementor_library_type' );
 
 			update_post_meta( $new_page_id, '_wp_page_template', 'elementor_header_footer' );
 
 			do_action( 'astra_sites_process_single', $new_page_id );
 
-			wp_send_json_success(
-				array(
-					'remove-page-id' => $page_id,
-					'id'             => $new_page_id,
-					'link'           => get_permalink( $new_page_id ),
-				)
-			);
-		}
-
-		/**
-		 * Import Birzy Media.
-		 *
-		 * @since  2.0.0
-		 */
-		public function import_media() {
-
-			// Verify Nonce.
-			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
-
-			$image_data = isset( $_POST['media'] ) ? $_POST['media'] : array();
-
-			if ( empty( $image_data ) ) {
-				wp_send_json_error();
-			}
-
-			$image            = array(
-				'url' => $image_data['url'],
-				'id'  => $image_data['id'],
-			);
-			$downloaded_image = Astra_Sites_Image_Importer::get_instance()->import( $image );
-
-			// Set meta data.
-			if ( isset( $image_data['meta'] ) && ! empty( $image_data['meta'] ) ) {
-				foreach ( $image_data['meta'] as $meta_key => $meta_value ) {
-					update_post_meta( $downloaded_image['id'], $meta_key, $meta_value );
-				}
-			}
-
-			wp_send_json_success();
-		}
-
-		/**
-		 * Import Page.
-		 *
-		 * @since  2.0.0
-		 */
-		public function create_page() {
-
-			// Verify Nonce.
-			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
-
-			if ( ! current_user_can( 'customize' ) ) {
-				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
-			}
-
-			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
-
-			$content = isset( $_POST['data']['original_content'] ) ? $_POST['data']['original_content'] : ( isset( $_POST['data']['content']['rendered'] ) ? $_POST['data']['content']['rendered'] : '' );
-
-			if ( 'elementor' === $default_page_builder ) {
-				if ( isset( $_POST['data']['astra-page-options-data'] ) && isset( $_POST['data']['astra-page-options-data']['elementor_load_fa4_shim'] ) ) {
-					update_option( 'elementor_load_fa4_shim', $_POST['data']['astra-page-options-data']['elementor_load_fa4_shim'] );
-				}
-			}
-
-			$data = isset( $_POST['data'] ) ? $_POST['data'] : array();
-
-			if ( empty( $data ) ) {
-				wp_send_json_error( 'Empty page data.' );
-			}
-
-			$page_id = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
-			$title   = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
-			$excerpt = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
-
-			$post_args = array(
-				'post_type'    => 'page',
-				'post_status'  => 'draft',
-				'post_title'   => $title,
-				'post_content' => $content,
-				'post_excerpt' => $excerpt,
-			);
-
-			$new_page_id = wp_insert_post( $post_args );
-			update_post_meta( $new_page_id, '_astra_sites_enable_for_batch', true );
-
-			$post_meta = isset( $_POST['data']['post-meta'] ) ? $_POST['data']['post-meta'] : array();
-
-			if ( ! empty( $post_meta ) ) {
-				$this->import_post_meta( $new_page_id, $post_meta );
-			}
-
-			if ( isset( $_POST['data']['astra-page-options-data'] ) && ! empty( $_POST['data']['astra-page-options-data'] ) ) {
-
-				foreach ( $_POST['data']['astra-page-options-data'] as $option => $value ) {
-					update_option( $option, $value );
-				}
-			}
-
-			if ( 'elementor' === $default_page_builder ) {
-				update_post_meta( $new_page_id, '_wp_page_template', 'elementor_header_footer' );
-			}
-
-			do_action( 'astra_sites_process_single', $new_page_id );
+			// Flush the object when import is successful.
+			delete_option( 'astra_sites_import_elementor_data_' . $id );
 
 			wp_send_json_success(
 				array(
@@ -942,9 +980,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
 			}
 
-			$url      = isset( $_POST['url'] ) ? esc_url_raw( $_POST['url'] ) : false;
+			$url      = isset( $_POST['url'] ) ? sanitize_url( $_POST['url'] ) : false; // phpcs:ignore -- We need to remove this ignore once the WPCS has released this issue fix - https://github.com/WordPress/WordPress-Coding-Standards/issues/2189.
 			$name     = isset( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : false;
-			$photo_id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+			$photo_id = isset( $_POST['id'] ) ? absint( sanitize_key( $_POST['id'] ) ) : 0;
 
 			if ( false === $url ) {
 				wp_send_json_error( __( 'Need to send URL of the image to be downloaded', 'astra-sites' ) );
@@ -1025,7 +1063,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			// If error storing permanently, unlink.
 			if ( is_wp_error( $id ) ) {
-				@unlink( $file_array['tmp_name'] ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+				@unlink( $file_array['tmp_name'] ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink -- Deleting the file from temp location.
 				return $id;
 			}
 
@@ -1248,9 +1286,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_defer_comment_counting( true );
 			wp_suspend_cache_invalidation( true );
 
-			$all_ids = ( isset( $_POST['ids'] ) ) ? $_POST['ids'] : '';
+			$all_ids = ( isset( $_POST['ids'] ) ) ? sanitize_text_field( $_POST['ids'] ) : '';
 
-			$posts = json_decode( stripslashes( $_POST['ids'] ), true );
+			$posts = json_decode( stripslashes( sanitize_text_field( $_POST['ids'] ) ), true );
 
 			if ( ! empty( $posts ) ) {
 				foreach ( $posts as $key => $post_id ) {
@@ -1472,7 +1510,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'is_elementor_active' => ( did_action( 'elementor/loaded' ) ),
 					'is_elementor_editor' => ( did_action( 'elementor/loaded' ) ) ? Elementor\Plugin::instance()->editor->is_edit_mode() : false,
 					'is_bb_editor'        => ( class_exists( 'FLBuilderModel' ) ) ? ( FLBuilderModel::is_builder_active() ) : false,
-					'is_brizy_editor'     => ( class_exists( 'Brizy_Editor_Post' ) ) ? ( isset( $_GET['brizy-edit'] ) || isset( $_GET['brizy-edit-iframe'] ) ) : false, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					'is_brizy_editor'     => ( class_exists( 'Brizy_Editor_Post' ) ) ? ( isset( $_GET['brizy-edit'] ) || isset( $_GET['brizy-edit-iframe'] ) ) : false, // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Fetching GET parameter, no nonce associated with this action.
 					'saved_images'        => get_option( 'astra-sites-saved-images', array() ),
 					'pixabay_category'    => array(
 						'all'            => __( 'All', 'astra-sites' ),
@@ -1683,7 +1721,16 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$license_status = BSF_License_Manager::bsf_is_active_license( 'astra-pro-sites' );
 			}
 
-			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
+			$spectra_theme = 'not-installed';
+			// Theme installed and activate.
+			if ( 'spectra-one' === get_option( 'stylesheet', 'astra' ) ) {
+				$spectra_theme = 'installed-and-active';
+			}
+			$default_page_builder = ( 'installed-and-active' === $spectra_theme ) ? 'fse' : Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
+
+			if ( is_callable( '\SureCart\Models\ApiToken::get()' ) ) {
+				$surecart_store_exist = \SureCart\Models\ApiToken::get();
+			}
 
 			$data = apply_filters(
 				'astra_sites_localize_vars',
@@ -1777,7 +1824,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'staging_connected' => apply_filters( 'astra_sites_staging_connected', '' ),
 					'isRTLEnabled' => is_rtl(),
 					/* translators: %s Anchor link to support URL. */
-					'support_text' => sprintf( __( 'Please report this error %1$shere%2$s, so we can fix it.', 'astra-sites' ), '<a href="https://wpastra.com/support/open-a-ticket/" target="_blank">', '</a>' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					'support_text' => sprintf( __( 'Please report this error %1$shere%2$s, so we can fix it.', 'astra-sites' ), '<a href="https://wpastra.com/support/open-a-ticket/" target="_blank">', '</a>' ),
+					'surecart_store_exists' => isset( $surecart_store_exist ) ? $surecart_store_exist : false,
 				)
 			);
 
@@ -1941,6 +1989,13 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$license_msg = sprintf( __( 'This is a premium template available with Essential Bundle and Growth Bundle. <a href="%s" target="_blank">Validate Your License</a> Key to import this template.', 'astra-sites' ), esc_url( admin_url( 'plugins.php?bsf-inline-license-form=astra-pro-sites' ) ) );
 			}
 
+			$last_viewed_block_data = array();
+			// Retrieve the value of the 'blockID' parameter using filter_input().
+			$id = filter_input( INPUT_GET, 'blockID', FILTER_SANITIZE_STRING );
+			if ( ! empty( $id ) ) {
+				$last_viewed_block_data = get_option( 'astra_sites_import_elementor_data_' . $id ) !== false ? get_option( 'astra_sites_import_elementor_data_' . $id ) : array();
+			}
+			
 			$data = apply_filters(
 				'astra_sites_render_localize_vars',
 				array(
@@ -1975,6 +2030,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'url'      => '#',
 						'url_text' => __( 'Read More →', 'astra-sites' ),
 					),
+
+					'last_viewed_block_data'   => $last_viewed_block_data,
 				)
 			);
 
@@ -2089,7 +2146,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			if ( ! defined( 'WP_CLI' ) && wp_doing_ajax() ) {
 				check_ajax_referer( 'astra-sites', '_ajax_nonce' );
 
-				if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
+				if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! sanitize_text_field( $_POST['init'] ) ) {
 					wp_send_json_error(
 						array(
 							'success' => false,
@@ -2101,7 +2158,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			Astra_Sites_Error_Handler::get_instance()->start_error_handler();
 
-			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : $init;
+			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( sanitize_text_field( $_POST['init'] ) ) : $init;
 			$activate = activate_plugin( $plugin_init, '', false, false );
 
 			Astra_Sites_Error_Handler::get_instance()->stop_error_handler();
@@ -2137,31 +2194,15 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		}
 
 		/**
-		 * Required Plugins
+		 * Retrieves the required plugins data based on the response and required plugin list.
 		 *
-		 * @since 2.0.0
-		 *
-		 * @param  array $required_plugins Required Plugins.
-		 * @param  array $options            Site Options.
-		 * @param  array $enabled_extensions Enabled Extensions.
-		 * @return mixed
+		 * @param array $response            The response containing the plugin data.
+		 * @param array $required_plugins    The list of required plugins.
+		 * @since 3.2.5
+		 * @return array                     The array of required plugins data.
 		 */
-		public function required_plugin( $required_plugins = array(), $options = array(), $enabled_extensions = array() ) {
-
-			// Verify Nonce.
-			if ( ! defined( 'WP_CLI' ) && wp_doing_ajax() ) {
-				check_ajax_referer( 'astra-sites', '_ajax_nonce' );
-			}
-
-			$response = array(
-				'active'       => array(),
-				'inactive'     => array(),
-				'notinstalled' => array(),
-			);
-
-			$options = astra_get_site_data( 'astra-site-options-data' );
-			$enabled_extensions = astra_get_site_data( 'astra-enabled-extensions' );
-			$required_plugins = astra_get_site_data( 'required-plugins' );
+		public function get_required_plugins_data( $response, $required_plugins ) {
+			
 			$learndash_course_grid = 'https://www.learndash.com/add-on/course-grid/';
 			$learndash_woocommerce = 'https://www.learndash.com/add-on/woocommerce/';
 			if ( is_plugin_active( 'sfwd-lms/sfwd_lms.php' ) ) {
@@ -2307,6 +2348,57 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'update_avilable_plugins'      => $update_avilable_plugins,
 				'incompatible_plugins'         => $incompatible_plugins,
 			);
+
+			return $data;
+		}
+
+		/**
+		 * Required Plugins
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param  array $required_plugins Required Plugins.
+		 * @param  array $options            Site Options.
+		 * @param  array $enabled_extensions Enabled Extensions.
+		 * @return mixed
+		 */
+		public function required_plugin( $required_plugins = array(), $options = array(), $enabled_extensions = array() ) {
+
+			// Verify Nonce.
+			if ( ! defined( 'WP_CLI' ) && wp_doing_ajax() ) {
+				check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+				if ( ! current_user_can( 'edit_posts' ) ) {
+					wp_send_json_error();
+				}
+			}
+
+			$response = array(
+				'active'       => array(),
+				'inactive'     => array(),
+				'notinstalled' => array(),
+			);
+
+			$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '';
+			$screen = isset( $_POST['screen'] ) ? sanitize_text_field( $_POST['screen'] ) : '';
+
+			if ( 'elementor' === $screen ) {
+				$options = array();
+				$enabled_extensions = array();
+				$imported_demo_data = get_option( 'astra_sites_import_elementor_data_' . $id, array() );
+				if ( 'astra-blocks' === $imported_demo_data['type'] ) {
+					// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
+					$plugins = unserialize( $imported_demo_data['post-meta']['astra-blocks-required-plugins'] ); // The use of `unserialize()` is necessary in this case to deserialize trusted serialized data.
+					$required_plugins = false !== $plugins ? $plugins : array();
+				} else {
+					$required_plugins = isset( $imported_demo_data['site-pages-required-plugins'] ) ? $imported_demo_data['site-pages-required-plugins'] : array();
+				}
+			} else {
+				$options = astra_get_site_data( 'astra-site-options-data' );
+				$enabled_extensions = astra_get_site_data( 'astra-enabled-extensions' );
+				$required_plugins = astra_get_site_data( 'required-plugins' );
+			}
+
+			$data = $this->get_required_plugins_data( $response, $required_plugins );
 
 			if ( wp_doing_ajax() ) {
 				wp_send_json_success( $data );

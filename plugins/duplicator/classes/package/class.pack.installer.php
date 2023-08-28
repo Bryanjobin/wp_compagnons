@@ -210,12 +210,11 @@ HEADER;
         $ac->dbhost      = (strlen($this->Package->Installer->OptsDBHost) ? $this->Package->Installer->OptsDBHost : null);
         $ac->dbname      = (strlen($this->Package->Installer->OptsDBName) ? $this->Package->Installer->OptsDBName : null);
         $ac->dbuser      = (strlen($this->Package->Installer->OptsDBUser) ? $this->Package->Installer->OptsDBUser : null);
-        $ac->dbpass      = null;
 
         $ac->mu_mode        = DUP_MU::getMode();
         $ac->wp_tableprefix = $wpdb->base_prefix;
         $ac->mu_generation  = DUP_MU::getGeneration();
-        $ac->mu_is_filtered = !empty($this->Package->Multisite->FilterSites) ? true : false;
+        $ac->mu_is_filtered = false;
 
         $ac->mu_siteadmins = array_values(get_super_admins());
         $filteredTables    = ($this->Package->Database->FilterOn && isset($this->Package->Database->FilterTables)) ? explode(',', $this->Package->Database->FilterTables) : array();
@@ -509,6 +508,7 @@ HEADER;
      *
      * @param string $slug      // plugin slug
      * @param array $plugin     // pluhin info from get_plugins function
+     *
      * @return array
      */
     protected static function getPluginArrayData($slug, $plugin)
@@ -567,6 +567,7 @@ HEADER;
      * return plugin formatted data from plugin info
      *
      * @param WP_Theme $theme instance of WP Core class WP_Theme. theme info from get_themes function
+     *
      * @return array
      */
     protected static function getThemeArrayData(WP_Theme $theme)
@@ -595,8 +596,8 @@ HEADER;
      * return list of extra files to att to archive
      *
      * @param bool $checkExists
+     *
      * @return array
-     * @throws Exception
      */
     private function getExtraFilesLists($checkExists = true)
     {
@@ -641,12 +642,6 @@ HEADER;
             'sourcePath'  => DUPLICATOR_LITE_PATH . '/src/Libs/Certificates',
             'archivePath' => 'dup-installer/libs/',
             'label'       => 'SSL certificates'
-        );
-
-        $result[] = array(
-            'sourcePath'  => DUPLICATOR_LITE_PATH . '/src/Libs/Upsell.php',
-            'archivePath' => 'dup-installer/libs/Upsell.php',
-            'label'       => 'Upgrade class'
         );
 
         $result[] = array(
@@ -752,7 +747,7 @@ HEADER;
             DUP_Log::trace("Doing archive file check");
             // Only way it's 2 is if the root was part of the filter in which case the archive won't be there
             if (file_exists($archive_filepath) == false) {
-                $error_text = sprintf(__("Zip archive %1s not present.", 'dup;icator'), $archive_filepath);
+                $error_text = sprintf(__("Zip archive %1s not present.", 'duplicator'), $archive_filepath);
                 DUP_Log::error($error_text, '', Dup_ErrorBehavior::LogOnly);
                 return false;
             }
@@ -931,7 +926,6 @@ HEADER;
      * Clear out sensitive database connection information
      *
      * @param $temp_conf_ark_file_path Temp config file path
-     * @throws Exception
      */
     private static function cleanTempWPConfArkFilePath($temp_conf_ark_file_path)
     {
