@@ -5,11 +5,11 @@
 <?php get_header(); ?>
 
 <main class="main">
-    <?php // get_banniere_equipe_festival(); ?>
+    <?php get_template_part("/template-part/banniere_equipe_festival") ?>
     <!-- Contenu du main -->
     <div class="main_content main_equipe">
         <p class="textblock-plus equipe_intro">Les Compagnons, c’est une petite équipe toute l’année, qui s’agrandit au moment de préparer son festival de contes et récits le Rendez-vous des Grandes Gueules. Voici l’équipe en charge des festivités cette année:</p>
-        <img src="./images/zigzag_separateur.png" class="zigzag_separateur" alt="séparateur en forme de zigzag">
+        <img src="<?php bloginfo("template_url"); ?>/images/zigzag_separateur.png" class="zigzag_separateur" alt="séparateur en forme de zigzag">
         <div class="equipe_cards_container">
             <?php
                 $membres = get_posts(array(
