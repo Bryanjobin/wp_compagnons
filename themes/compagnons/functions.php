@@ -63,5 +63,3 @@ add_action( 'init', function() {
     add_action("after_setup_theme", "logo_setup");
 
 ?>
-
-
