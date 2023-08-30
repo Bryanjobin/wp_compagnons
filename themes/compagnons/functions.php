@@ -1,11 +1,16 @@
 <?php
 
 function files() {
-    wp_enqueue_style( 'style', get_stylesheet_uri() );
-} 
+    wp_enqueue_style('style', get_stylesheet_uri() );
+    wp_enqueue_script("main", "/wp-content/themes/compagnons/js/main.js" );
+    wp_enqueue_script("artistes", "/wp-content/themes/compagnons/js/artistes.js" );
+    wp_enqueue_script("accueil", "/wp-content/themes/compagnons/js/accueil.js" );
+    wp_enqueue_script("accueil_rdv", "/wp-content/themes/compagnons/js/accueil_rdv.js" );
+    wp_enqueue_script("_accordion", "/wp-content/themes/compagnons/js/classes/_accordion.js");
+    wp_enqueue_script("_header", "/wp-content/themes/compagnons/js/classes/_header.js");
+}; 
 
 add_action( 'wp_enqueue_scripts', 'files' );
-
 
 function my_acf_json_load_point( $paths ) {
     unset($paths[0]);
@@ -43,72 +48,20 @@ add_action( 'init', function() {
     ) );
 } );
 
-//INSERT JAVASCRIPT IN HEADER
 
-    function ti_custom_javascript() {
-        ?>
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const mobileHeaderBtns = document.querySelectorAll('.m_header_container_button_primary');
-                    const mobileHeaderBtnsLists = document.querySelectorAll('.m_header_container_button_secondary');
-                    const mobileHeaderMenu = document.querySelector('.m_header_container');
-                    const mobileHeaderMenuBtn = document.querySelector('.m_header_top_hamburger');
-                    const mobileHeaderMenuBtnIcon = document.querySelector('.m_header_top_hamburger_icon');
-                    const mobileMain = document.querySelector('main');
-                    //const mobileFooter = document.querySelector('footer');
+    //SETTING LOGO
 
-                    mobileHeaderMenuBtn.addEventListener('click', () => {
-                        if (mobileHeaderMenuBtnIcon.textContent === 'close') {
-                            mobileHeaderMenuBtnIcon.textContent = 'menu';
-                            mobileHeaderMenu.style.display = 'none';
-                            mobileMain.style.display = 'block';
-                            mobileFooter.style.display = 'block';
-                        } else {
-                            mobileHeaderMenuBtnIcon.textContent = 'close';
-                            mobileHeaderMenu.style.display = 'flex';
-                            mobileMain.style.display = 'none';
-                           // mobileFooter.style.display = 'none';
-                        }
-                    })
+    function logo_setup(){
+        add_theme_support("custom-logo", array(
+            "width" => 473,
+            "height" => 204,
+            "flex-width" => true,
+            "flex-height" => true,
+        ));
+    };
 
-                    mobileHeaderBtns.forEach((button, index) => {
-                        button.addEventListener('click', () => {
-                            const isHidden = mobileHeaderBtnsLists[index].style.display === 'none' || mobileHeaderBtnsLists[index].style.display === '';
+    add_action("after_setup_theme", "logo_setup");
 
-                            if (isHidden) {
-                                mobileHeaderBtnsLists[index].style.display = 'flex';
-                                button.querySelector('.m_header_container_button_primary_right .material-symbols-outlined').textContent = 'expand_less';
-                            } else {
-                                mobileHeaderBtnsLists[index].style.display = 'none';
-                                button.querySelector('.m_header_container_button_primary_right .material-symbols-outlined').textContent = 'expand_more';
-                            }
-                        });
-                    });
-
-                /*// ACCORDION //
-                    const accordion = document.querySelector('.simpliquer_menterie_accordion');
-                    const panel = document.querySelector('.simpliquer_menterie_accordion_panel');
-                    const icon = document.querySelector('.material-symbols-outlined');
-                    const chevronUp = "expand_less";
-                    const chevronDown = "expand_more";
-                    let currentIcon = chevronUp;
-
-                    accordion.addEventListener('click', () =>{
-                        if (panel.style.display === "block" && currentIcon === chevronUp){
-                            panel.style.display = "none";
-                            icon.innerHTML = currentIcon;
-                            currentIcon = chevronDown;
-                        } else{
-                            panel.style.display = "block";
-                            icon.innerHTML = currentIcon;
-                            currentIcon = chevronUp;
-                        }
-                    })*/
-                })
-            </script>
-        <?php
-    }
-    add_action('wp_head', 'ti_custom_javascript');
 ?>
 
 

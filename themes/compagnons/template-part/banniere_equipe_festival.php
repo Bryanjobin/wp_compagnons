@@ -5,7 +5,7 @@
             <h2 class="h1">L'équipe du festival</h2>
         </div>
         <div class="rdv_banner_img_container">
-            <img src="./images/rdv_banner_img.png" alt="conteur d'histoire">
+            <img src="<?php bloginfo("template_url") ?>/images/rdv_banner_img.png" alt="conteur d'histoire">
         </div>
     </div>
 </div>
