@@ -5,12 +5,12 @@
 <?php get_header(); ?>
 
 <main class="main">
-    <div class="mission_banner">
-        <div class="mission_banner_title_container">
-            <h2 class="h1">notre mission</h2>
-        </div>
-        <div class="mission_banner_img_container">
-            <img src="<?php bloginfo("template_url") ?>/images/mission_banner_img.png" alt="photo antique de femmes">
+    <div class="infos_banner">
+        <div class="infos_banner_img_container">
+            <img src="<?php bloginfo("template_url") ?>/images/infos_banner_img.png" alt="photo antique de la forge">
+        </div>  
+        <div class="infos_banner_title_container">
+            <h2 class="h1">informations pratiques</h2>
         </div>
     </div>
     <!-- Contenu du main -->
