@@ -119,8 +119,8 @@
             <div class="footer_nav_right_content_reseaux">
                 <h3>SUIVEZ-NOUS!</h3>
                 <div class="footer_nav_right_content_reseaux_footer_icons">
-                    <img src='./images/ici.png' alt='ici'> <a href='#'><i class="bi bi-facebook" aria-label="icone facebook"></i></a>
-                    <a href='#'><i class="bi bi-instagram" aria-label="icone instagram"></i></a><img src='./images/et-ici.png' alt='et-ici'>
+                    <img src='<?php bloginfo("template_url"); ?>/images/ici.png' alt='ici'> <a href='#'><i class="bi bi-facebook" aria-label="icone facebook"></i></a>
+                    <a href='#'><i class="bi bi-instagram" aria-label="icone instagram"></i></a><img src='<?php bloginfo("template_url"); ?>/images/et-ici.png' alt='et-ici'>
                 </div>  
             </div>
         </div>

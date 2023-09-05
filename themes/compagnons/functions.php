@@ -2,12 +2,12 @@
 
 function files() {
     wp_enqueue_style('style', get_stylesheet_uri() );
-    wp_enqueue_script("main", "/wp-content/themes/compagnons/js/main.js" );
-    wp_enqueue_script("artistes", "/wp-content/themes/compagnons/js/artistes.js" );
-    wp_enqueue_script("accueil", "/wp-content/themes/compagnons/js/accueil.js" );
-    wp_enqueue_script("accueil_rdv", "/wp-content/themes/compagnons/js/accueil_rdv.js" );
-    wp_enqueue_script("_accordion", "/wp-content/themes/compagnons/js/classes/_accordion.js");
-    wp_enqueue_script("_header", "/wp-content/themes/compagnons/js/classes/_header.js");
+    wp_enqueue_script("main", "/wp-content/themes/compagnons/js/main.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script("accueil", "/wp-content/themes/compagnons/js/accueil.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script("accueil_rdv", "/wp-content/themes/compagnons/js/accueil_rdv.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script("_accordion", "/wp-content/themes/compagnons/js/classes/_accordion.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script("_header", "/wp-content/themes/compagnons/js/classes/_header.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script('accueil_compagnons', "/wp-content/themes/compagnons/js/accueil_compagnons.js", array(), "",  array( 'strategy' => 'defer'));
 }; 
 
 add_action( 'wp_enqueue_scripts', 'files' );
@@ -47,7 +47,6 @@ add_action( 'init', function() {
         'delete_with_user' => false,
     ) );
 } );
-
 
     //SETTING LOGO
 
