@@ -79,7 +79,7 @@ $logo_src= wp_get_attachment_image_src($compagnons_logo_ID, "full");
                     <button class="m_header_container_button_primary bg_rdv ">
                         <div class="m_header_container_button_primary_left">
                             <p>NOTRE FESTIVAL</p>
-                            <p class="m_header_container_button_primary_left_big">RENDEZ-VOUS DES GRANDES GEULES</p>                            
+                            <p class="m_header_container_button_primary_left_big">RENDEZ-VOUS DES GRANDES GUEULES</p>                            
                         </div>
                         <div class="m_header_container_button_primary_right">
                             <span class="expand_icon material-symbols-outlined">
