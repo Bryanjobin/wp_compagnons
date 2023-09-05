@@ -53,11 +53,21 @@ body{
     align-items: center;
     text-decoration: none;
     padding: 15px;
+    width: 100%;
 }
 
 
 .mission_banner_img_container{
     display: none;
+}
+
+.accueil_compagnons_banner>h2{
+    margin-top: 5px;
+}
+
+.mission_banner_title_container{
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -477,8 +487,7 @@ body{
 
     .mission_banner_title_container{
         width: 50%;
-        display: flex;
-        justify-content: center;
+        margin-left: 120px;
     }
 
     .mission_banner_img_container{
@@ -715,7 +724,6 @@ body{
         margin-bottom: -35px;
     }
 
-
      /* --- Navigation du footer --- */
     .footer_nav_left_content{
         width: 800px;
@@ -765,6 +773,10 @@ body{
     /*.eco_banner_container p{
         font-size: 20px;
     }*/
+
+    .mission_banner_title_container{
+        margin-left: 220px;
+    }
 }
 
 @media screen and (min-width: 2500px){
