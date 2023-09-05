@@ -7,7 +7,7 @@
 <main class="main">
     <div class="infos_banner">
         <div class="infos_banner_img_container">
-            <img src="./images/infos_banner_img.png" alt="photo antique de la forge">
+            <img src="<?php bloginfo("template_url") ?>/images/infos_banner_img.png" alt="photo antique de la forge">
         </div>  
         <div class="infos_banner_title_container">
             <h2 class="h1">la forge en action</h2>

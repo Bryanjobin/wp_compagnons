@@ -9,6 +9,7 @@ function files() {
     wp_enqueue_script("_header", "/wp-content/themes/compagnons/js/classes/_header.js", array(), "",  array( 'strategy' => 'defer'));
     wp_enqueue_script('accueil_compagnons', "/wp-content/themes/compagnons/js/accueil_compagnons.js", array(), "",  array( 'strategy' => 'defer'));
     wp_enqueue_script('_accordion2', "/wp-content/themes/compagnons/js/classes/_accordion2.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script('_programmation', "/wp-content/themes/compagnons/js/classes/_programmation.js", array(), "",  array( 'strategy' => 'defer'));
 }; 
 
 add_action( 'wp_enqueue_scripts', 'files' );
