@@ -5,7 +5,14 @@
 <?php get_header(); ?>
 
 <main class="main">
-    <?php get_template_part("/template-part/banniere_equipe_festival") ?>
+    <div class="mission_banner">
+        <div class="mission_banner_title_container">
+            <h2 class="h1">notre histoire</h2>
+        </div>
+        <div class="mission_banner_img_container">
+            <img src="<?php bloginfo("template_url") ?>/images/mission_banner_img.png" alt="photo antique de femmes">
+        </div>
+    </div>
     <!-- Contenu du main -->
     <div class="main_content main_equipe">
         <section class="text_intro">
