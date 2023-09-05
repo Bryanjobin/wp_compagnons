@@ -34,6 +34,15 @@
     font-size: 16px;
 }
 
+.h4-underlined {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: underline;
+    padding: 0;
+    margin: 0 0 2px 0;
+}
+
 .card-title{
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
@@ -69,6 +78,15 @@
     text-decoration: underline 2px solid black;
 }
 
+.textblock-nomp {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23.5px;
+    padding: 0;
+    margin: 0;
+}
+
 .btn-link{
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
@@ -81,6 +99,7 @@
     font-size: 24px;
     transition: 300ms;
 }
+
 .btn-default:active{
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
@@ -88,7 +107,18 @@
     transition: 300ms;
 }
 
+.underline {
+    text-decoration: underline;
+}
 
+.link {
+    color: black;
+    font-size: 16px;
+}
+
+.link:hover, .link:focus {
+    font-weight: 500;
+}
 
 @media screen and (min-width: 1500px){
 

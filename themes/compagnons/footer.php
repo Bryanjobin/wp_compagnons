@@ -108,7 +108,7 @@
         <div class="footer_nav_right_content">
             <div class="footer_nav_right_content_contact_infos">
                 <div class="btn_container">
-                    <button class="footer_nav_right_content_contact_infos_contact_btn btn-cta alpha2pink"><span class="btn-default">nous contacter</span></button>
+                    <button class="footer_nav_right_content_contact_infos_contact_btn btn-cta alpha2pink"><span class="btn-default"><span class="btn-default" >nous contacter</span></span></button>
                 </div>
                 <div class="footer_nav_right_content_contact_infos_address_tel_email_container">
                     <p><i class="bi bi-geo-alt-fill"></i>  363 Rue Vézina, Trois-Pistoles, QC G0L 4K0</p>

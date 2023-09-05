@@ -22,3 +22,11 @@ Version: 1.0
 @import url(./css/_accueil.css);
 @import url(./css/_la_bavarde.css);
 @import url(./css/_festival_responsable.css);
+
+
+
+
+
+/* Intégration par Bryan : */
+@import url(./css/_notre_mission.css);
+@import url(./css/_notre_histoire.css);
