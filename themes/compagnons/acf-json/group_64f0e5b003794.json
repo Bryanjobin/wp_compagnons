@@ -1,11 +1,11 @@
 {
-    "key": "group_64ecf04051345",
-    "title": "Carte d'employé du festival",
+    "key": "group_64f0e5b003794",
+    "title": "Membre CA",
     "fields": [
         {
-            "key": "field_64ecf04003564",
-            "label": "Nom",
-            "name": "nom_employe",
+            "key": "field_64f0e5b093489",
+            "label": "Nom complet, poste occupé au sein du CA",
+            "name": "nom_complet_CA",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -23,34 +23,9 @@
             "append": ""
         },
         {
-            "key": "field_64ecf07603565",
-            "label": "Photo de l'employé",
-            "name": "photo_de_lemploye",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "preview_size": "medium"
-        },
-        {
-            "key": "field_64ecf0df03566",
-            "label": "Poste",
-            "name": "poste_employe",
+            "key": "field_64f0e5e09348a",
+            "label": "Titre et\/ou occupation",
+            "name": "titre_CA",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -73,7 +48,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "membre-festival"
+                "value": "membre-ca"
             }
         ]
     ],
@@ -86,5 +61,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1693917538
+    "modified": 1693926654
 }
