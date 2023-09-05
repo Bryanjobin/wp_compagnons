@@ -108,7 +108,7 @@
         <div class="footer_nav_right_content">
             <div class="footer_nav_right_content_contact_infos">
                 <div class="btn_container">
-                    <button class="footer_nav_right_content_contact_infos_contact_btn btn-cta alpha2pink"><span class="btn-default">nous contacter</span></button>
+                    <button class="footer_nav_right_content_contact_infos_contact_btn btn-cta alpha2pink"><span class="btn-default"><span class="btn-default" >nous contacter</span></span></button>
                 </div>
                 <div class="footer_nav_right_content_contact_infos_address_tel_email_container">
                     <p><i class="bi bi-geo-alt-fill"></i>  363 Rue Vézina, Trois-Pistoles, QC G0L 4K0</p>
@@ -119,8 +119,8 @@
             <div class="footer_nav_right_content_reseaux">
                 <h3>SUIVEZ-NOUS!</h3>
                 <div class="footer_nav_right_content_reseaux_footer_icons">
-                    <img src='./images/ici.png' alt='ici'> <a href='#'><i class="bi bi-facebook" aria-label="icone facebook"></i></a>
-                    <a href='#'><i class="bi bi-instagram" aria-label="icone instagram"></i></a><img src='./images/et-ici.png' alt='et-ici'>
+                    <img src='<?php bloginfo("template_url"); ?>/images/ici.png' alt='ici'> <a href='#'><i class="bi bi-facebook" aria-label="icone facebook"></i></a>
+                    <a href='#'><i class="bi bi-instagram" aria-label="icone instagram"></i></a><img src='<?php bloginfo("template_url"); ?>/images/et-ici.png' alt='et-ici'>
                 </div>  
             </div>
         </div>
