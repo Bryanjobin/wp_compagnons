@@ -8,6 +8,10 @@ function files() {
     wp_enqueue_script("_accordion", "/wp-content/themes/compagnons/js/classes/_accordion.js", array(), "",  array( 'strategy' => 'defer'));
     wp_enqueue_script("_header", "/wp-content/themes/compagnons/js/classes/_header.js", array(), "",  array( 'strategy' => 'defer'));
     wp_enqueue_script('accueil_compagnons', "/wp-content/themes/compagnons/js/accueil_compagnons.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script('jquery', "//code.jquery.com/jquery-1.11.0.min.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script('jquery-migrate', "//code.jquery.com/jquery-migrate-1.2.1.min.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script('slick-js', "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js", array(), "",  array( 'strategy' => 'defer'));
+    wp_enqueue_script("_slick_slider", "/wp-content/themes/compagnons/js/classes/_slick_slider.js", array(), "",  array( 'strategy' => 'defer'));
 }; 
 
 add_action( 'wp_enqueue_scripts', 'files' );
@@ -47,6 +51,52 @@ add_action( 'init', function() {
         'delete_with_user' => false,
     ) );
 } );
+
+add_action( 'init', function() {
+	register_post_type( 'image-carousel', array(
+	'labels' => array(
+		'name' => 'images-carousel',
+		'singular_name' => 'image-carousel',
+		'menu_name' => 'images-carousel',
+		'all_items' => 'All images-carousel',
+		'edit_item' => 'Edit image-carousel',
+		'view_item' => 'View image-carousel',
+		'view_items' => 'View images-carousel',
+		'add_new_item' => 'Add New image-carousel',
+		'new_item' => 'New image-carousel',
+		'parent_item_colon' => 'Parent image-carousel:',
+		'search_items' => 'Search images-carousel',
+		'not_found' => 'No images-carousel found',
+		'not_found_in_trash' => 'No images-carousel found in Trash',
+		'archives' => 'image-carousel Archives',
+		'attributes' => 'image-carousel Attributes',
+		'insert_into_item' => 'Insert into image-carousel',
+		'uploaded_to_this_item' => 'Uploaded to this image-carousel',
+		'filter_items_list' => 'Filter images-carousel list',
+		'filter_by_date' => 'Filter images-carousel by date',
+		'items_list_navigation' => 'images-carousel list navigation',
+		'items_list' => 'images-carousel list',
+		'item_published' => 'image-carousel published.',
+		'item_published_privately' => 'image-carousel published privately.',
+		'item_reverted_to_draft' => 'image-carousel reverted to draft.',
+		'item_scheduled' => 'image-carousel scheduled.',
+		'item_updated' => 'image-carousel updated.',
+		'item_link' => 'image-carousel Link',
+		'item_link_description' => 'A link to a image-carousel.',
+	),
+	'public' => true,
+	'show_in_rest' => true,
+	'menu_icon' => 'dashicons-format-image',
+	'supports' => array(
+		0 => 'title',
+		1 => 'editor',
+		2 => 'thumbnail',
+	),
+	'delete_with_user' => false,
+) );
+} );
+
+
 
     //SETTING LOGO
 

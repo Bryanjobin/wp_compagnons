@@ -322,6 +322,7 @@
     background-color: black;
     display: flex;
     justify-content: center;
+    padding: 30px 0;
 }
 
 .images_container img{
@@ -448,6 +449,7 @@
         left: 90px;
         transform: rotate(-3deg);
         width: 30%;
+        z-index: 5;
     }
 
     

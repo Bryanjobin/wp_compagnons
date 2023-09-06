@@ -19,7 +19,6 @@ const histoireTitle = document.querySelector('.histoire_title');
 const projetsTitle = document.querySelector('.projets_title');
 const partenairesTitle = document.querySelector('.partenaires_title');
 
-console.log(notreEquipe);
 // Animation - images - notre équipe
 
 if (notreEquipe) {

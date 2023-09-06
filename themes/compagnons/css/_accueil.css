@@ -301,7 +301,18 @@
     font-size: 16px;
 }
 
+.images_container{
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+}
 
+.slick-carousel{
+    width: 85%;
+}
+
+.slick-carousel img{
+    width: 100%;
+}
 
 
 @media screen  and (min-width: 600px){
