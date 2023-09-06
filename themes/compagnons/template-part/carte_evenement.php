@@ -9,7 +9,10 @@ $args = wp_parse_args($args, array(
     "prix" => '', 
     "billeterie" => '',
     "image_url" => '',
-    "image_alt" => ''
+    "image_alt" => '',
+    "discipline" => '',
+    "free_option" => '',
+    "familiale_option" => ''
 ));
 ?>
 
@@ -28,8 +31,13 @@ $args = wp_parse_args($args, array(
                     </div>
                     <p  class="eventCard_infoBox_info_container_desc"><?php echo $args['desc']?></p>
                 </div>
+                <div class="hidden">
+                    <p class="eventCard_discipline">discipline = <?php echo $args['discipline']?></p>
+                    <p class="eventCard_freeOption">free = <?php echo $args['free_option']?></p>
+                    <p class="eventCard_familialeOption">familiale = <?php echo $args['familiale_option']?></p>
+                </div>
                 <div class="eventCard_infoBox_info_buttonContainer">
-                    <button class="eventCard_infoBox_info_button btn-link bg-white"><a href="<?php echo $args['billeterie']?>" class="btn_default" target="_blank">Acheter des billets </a><span class="material-symbols-outlined eventCard_infoBox_info_button_icon">arrow_right_alt</span></button>                                
+                    <a class="eventCard_link" href="<?php echo $args['billeterie']?>" target="_blank"><button class="eventCard_infoBox_info_button btn-link bg-white">Acheter des billets<span class="material-symbols-outlined eventCard_infoBox_info_button_icon">arrow_right_alt</span></button></a>
                 </div>
             </div>
         </div>

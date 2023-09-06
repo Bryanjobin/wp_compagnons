@@ -183,6 +183,92 @@
             "max_size": "",
             "mime_types": "",
             "preview_size": "medium"
+        },
+        {
+            "key": "field_64f8c074899fd",
+            "label": "Discipline",
+            "name": "discipline",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "Conte": "Conte",
+                "Poésie": "Poésie",
+                "Musique": "Musique",
+                "Humour": "Humour"
+            },
+            "default_value": "Choisir",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_64f8c0e0899fe",
+            "label": "Est-ce que c'est gratuit ?",
+            "name": "free_option",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Gratuit",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_64f8c2a9d1668",
+            "label": "Est-ce que c'est Familiale ?",
+            "name": "familiale_option",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Familiale",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_64f8c194899ff",
+            "label": "Date de l'événement (Pour la data)",
+            "name": "data_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "F j, Y",
+            "return_format": "F j, Y",
+            "first_day": 0
         }
     ],
     "location": [
@@ -203,5 +289,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1693940153
+    "modified": 1694024748
 }

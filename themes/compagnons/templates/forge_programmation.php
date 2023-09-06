@@ -51,11 +51,11 @@
                     <div class="programmation_filters_checkBox">
                         <div class="checkbox-container">
                             <label class="checkbox-label" for="gratuit">Gratuit</label>
-                            <input type="checkbox" id="gratuit" name="gratuit">
+                            <input class="free_checkbox" type="checkbox" id="gratuit" name="gratuit">
                         </div>
                         <div class="checkbox-container">
                             <label class="checkbox-label" for="familiale">Familiale</label>
-                            <input type="checkbox" id="familiale" name="familiale">
+                            <input class="familiale_checkbox" type="checkbox" id="familiale" name="familiale">
                         </div>
                     </div>
                 </div>
@@ -83,6 +83,10 @@
 
                     $image_url = esc_url($image['url']);
                     $image_alt = esc_attr($image['alt']);
+
+                    $discipline = get_field('discipline', $event->ID);
+                    $free_option = get_field('free_option', $event->ID);
+                    $familiale_option = get_field('familiale_option', $event->ID);
                     ?>
 
                     <?php get_template_part('template-part/carte_evenement', null, array(
@@ -96,7 +100,10 @@
                         "billeterie" => $billeterie,
                         "image" => $image,
                         "image_url" => $image_url,
-                        "image_alt" => $image_alt
+                        "image_alt" => $image_alt,
+                        "discipline" => $discipline,
+                        "free_option" => $free_option,
+                        "familiale_option" => $familiale_option
                     ));     
                     ?>
 
