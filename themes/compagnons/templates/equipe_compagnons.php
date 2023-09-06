@@ -49,9 +49,6 @@
 
             </section>
             <section class="conseil_admin">
-               
-
-
                 <h2 class="h2-cursive">Le conseil d'administration</h2>
                 <p class="textblock">Les orientations stratégiques et financières de l’organisme sont guidées par notre conseil d’administration. L’ancrage de notre conseil dans la communauté locale facilite la conciliation de nos activités avec les besoins et spécificités de notre milieu.</p>
                 <div class="conseil_admin_membres">
@@ -75,3 +72,4 @@
             </section>
         </div>
     </main>
+    <?php get_footer(); ?>

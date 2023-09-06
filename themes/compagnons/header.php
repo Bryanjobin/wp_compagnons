@@ -190,4 +190,4 @@ $logo_src= wp_get_attachment_image_src($compagnons_logo_ID, "full");
                 </nav>
             </div>
         </div>
-    </header>
+</header>
