@@ -130,7 +130,7 @@
 }
 
 .eventCard_infoBox_date_date {
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .eventCard_infoBox_date_date, .eventCard_infoBox_date_day {
@@ -167,9 +167,14 @@
 
 .eventCard_infoBox_info_container_desc {
     width: 90%;
-    display: none;
+    max-height: 200px;
     margin: auto;
+    overflow-y: auto;
+    display: none;
     margin-top: 10px;
+    word-wrap: break-word;
+    padding-right: 12px;
+    padding-left: 12px ;
 }
 
 .eventCard_infoBox_info_buttonContainer {
@@ -186,12 +191,17 @@
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 10px;
     padding-left: 10px;
     background-color: white;
     border: none;
+    margin-top: 10px;
     padding: 5px;
-    width: 90%;
+    width: 100%;
+}
+
+.eventCard_link {
+    text-decoration: none;
 }
 
 .eventCard_infoBox_info_button > .material-symbols-outlined {
@@ -208,12 +218,18 @@
     color: white;
 }
 
+.eventCard_photoBox {
+    width: 170px;
+    height: 280px;
+    overflow: hidden;
+}
+
 .eventCard_photoBox > img {
     display: block;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .eventCard_titleBox {
@@ -228,8 +244,10 @@
     margin: 0;
 }
 
-
-
+/*------------------------ HIDDEN ------------------------*/
+.hidden {
+    display: none;
+}
 
 @media screen and (min-width: 720px) {
     .programmation_filters_checkBox {
@@ -246,7 +264,9 @@
 @media screen and (min-width: 900px) {
     /* CARTES */
     .eventCard {
+        width: 300px;
         max-width: 300px; /* GROSSEUR DES CARTES ICI SEULEMENT */
+        max-height: 475px;
     }
 
     .eventCard_infoBox{
@@ -280,6 +300,7 @@
 
     .eventCard_infoBox_info_button {
         font-size: 20px;
+        width: 260px;
     }
 
     .eventCard_infoBox_info_button > .material-symbols-outlined {
@@ -295,10 +316,27 @@
         transition: padding 0.1s ease-in-out;
     }
 
+    .eventCard_infoBox_date_date {
+        font-size: 1.5em;
+    }
+
     .eventCard_titleBox {
         padding: 12px;
         padding-left: 5%;
         background-color: black;
         color: white;
+    }
+
+    .eventCard_photoBox {
+        width: 300px;
+        height: 420px;
+        overflow: hidden;
+    }
+
+    .eventCard_photoBox > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 }

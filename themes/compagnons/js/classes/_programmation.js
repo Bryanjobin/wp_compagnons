@@ -5,6 +5,7 @@ if (window.innerWidth >= 900) {
     eventCards.forEach((eventCard) => {
         const eventCardInfoBox = eventCard.querySelector(".eventCard_infoBox");
         const eventCardInfoBoxContent = eventCard.querySelector(".eventCard_infoBox_info");
+        const eventCardDesc = eventCard.querySelector(".eventCard_infoBox_info_container_desc");
 
         eventCard.addEventListener("mouseenter", () => {
             eventCardInfoBoxContent.style.display = "flex";
@@ -53,5 +54,4 @@ searchInput.addEventListener('focusout', () => {
     searchInputIcon.style.transition = "color 0.3s ease-in-out, margin-right 0.3s ease-in-out";
 });
 
-// DATE 
-const dateBox = document.querySelector('.');
+// FILTER MODE
