@@ -5,3 +5,7 @@
 .faq_text {
     text-align: center;
 }
+
+.accordion_dropdown_content ul>li{
+    line-height: 25px;
+}

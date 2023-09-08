@@ -72,7 +72,7 @@
         <div class="derniere_edition_imgs">
             <p class="les_meilleurs_moments">Les meilleurs moments de notre dernière édition</p>
             <div class="images_container">
-            <?php echo do_shortcode('[smartslider3 slider="2"]'); ?> 
+                <?php echo do_shortcode('[smartslider3 slider="2"]'); ?> 
             </div>
             <a href="#" class="galerie-link">Voir la galerie ➔</a>
         </div>

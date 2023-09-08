@@ -22,6 +22,10 @@
     border: none;
 }
 
+.btn-cta:hover{
+    cursor: pointer;
+}
+
 .btn-cta:hover, .btn-cta:focus{
     transition: 300ms;
 }
