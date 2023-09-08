@@ -6,7 +6,7 @@
 
 <main class="main accueil_main">
         <div class="liens_filiere">
-            <a href="#" class="filiere_banner_compagnons">
+            <a href="<?php echo get_home_url(); ?>/compagnons_accueil" class="filiere_banner_compagnons">
                 <div class="compagnons_filiere_filter"></div>
                 <div class="filiere_banner_compagnons_titles_container">
                     <p class="prior_title">NOTRE ORGANISME</p>
@@ -14,14 +14,14 @@
                     <p class="after_title">DE LA MISE EN VALEUR DU PATRIMOINE VIVANT DE TROIS-PISTOLES</p>
                 </div>
             </a>
-            <a href='#' class="filiere_banner_forge">
+            <a href='' class="filiere_banner_forge">
                 <div class="forge_filiere_filter"></div>
                 <div class="filiere_banner_forge_titles_container">
                     <p class="prior_title">NOTRE SALLE</p>
                     <h2 class="h2 filiere_title">LA FORGE À BÉRUBÉ</h2>
                 </div>
             </a>
-            <a href="#" class="filiere_banner_rdv">
+            <a href="<?php echo get_home_url(); ?>/accueil-rendez-vous" class="filiere_banner_rdv">
                 <div class="rdv_filiere_filter"></div>
                 <div class="filiere_banner_rdv_titles_container">
                     <p class="prior_title">NOTRE FESTIVAL</p>
@@ -37,7 +37,7 @@
             </a>
         </div>
         <div class="liens_baniere">
-            <a href="#" class="link_banner_compagnons">
+            <a href="<?php echo get_home_url(); ?>/compagnons_accueil" class="link_banner_compagnons">
                 <div class="link_banner_titles_container">
                     <p class="prior_title">NOTRE ORGANISME</p>
                     <h2 class="h2 filiere_title">LES COMPAGNONS</h2>
@@ -50,7 +50,7 @@
                     <h2 class="h2 filiere_title">LA FORGE À BÉRUBÉ</h2>
                 </div>
             </a>
-            <a href="#" class="link_banner_rdv">
+            <a href="<?php echo get_home_url(); ?>/accueil-rendez-vous" class="link_banner_rdv">
                 <div class="link_banner_titles_container">
                     <p class="prior_title">NOTRE FESTIVAL</p>
                     <h2 class="h2 filiere_title">RENDEZ-VOUS DES GRANDES GEULES</h2>

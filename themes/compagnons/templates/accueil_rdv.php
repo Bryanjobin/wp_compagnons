@@ -62,7 +62,7 @@
                 <div class="billetterie_banner">
                     <p class="textblock">Procurez-vous vos billets et passes sur notre billetterie en ligne sur le site lepointdevente.com ou contactez-nous au <span>418-857-3248</span>!</p>
                         <img class="billet_arrow" src="<?php bloginfo("template_url") ?>/images/billetterie_arrow.png" alt="flèche qui pointe vers un billet">
-                        <a href="#">
+                        <a href="https://lepointdevente.com/les-compagnons-de-la-mise-en-valeur-du-patrimoine-vivant-de-troi">
                             <img class="billet_mockup" src="<?php bloginfo("template_url") ?>/images/billet_mockup.png" alt="bouton acheter des billets">
                         </a>
                 </div>
@@ -100,14 +100,14 @@
                 </div>
             </div>
             <div class="bavarde_container">
-                <div href="#" class="bavarde_container_imgs">
+                <div class="bavarde_container_imgs">
                     <img src="<?php bloginfo("template_url") ?>/images/Dawn.png" alt="étoile" class="dawn">
                     <img src="<?php bloginfo("template_url") ?>/images/bavarde_gris.png" alt="photo de la bière La Bavarde" class="bavarde_gris">
                 </div>
                 <div class="bavarde_container_text">
                     <h3 class="h3-cursive bavarde_green sub_section_h3">La Bavarde</h3>
                     <p class="textblock-plus">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
-                    <a href="#" class="sub_section_link">En savoir plus</a>
+                    <a href="<?php echo get_home_url(); ?>/la-bavarde" class="sub_section_link">En savoir plus</a>
                 </div>
             </div>
             <div class="responsable_container">

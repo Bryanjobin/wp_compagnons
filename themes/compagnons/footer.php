@@ -41,7 +41,7 @@
                         <li><a href='#'>NOTRE ÉQUIPE</a></li>
                         <li><a href='#'>NOTRE MISSION</a></li>
                         <li><a href='#'>NOTRE HISTOIRE</a></li>
-                        <li><a href='#'>NOS PARTENAIRES</a></li>
+                        <li><a href='<?php echo get_home_url(); ?>/les_compagnons/nos-partenaires'>NOS PARTENAIRES</a></li>
                         <li><a href='#'>NOS PROJETS</a></li>
                     </ul>
                 </div>
