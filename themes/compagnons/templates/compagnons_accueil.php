@@ -25,14 +25,14 @@
             <div class="notre_equipe_container_text">
                 <h3 class="h3-cursive equipe_title sub_section_h3">notre equipe</h3>
                 <p class="textblock-plus">Les Compagnons, c’est une petite équipe toute l’année, qui s’agrandit au moment de préparer son festival de contes et récits le Rendez-vous des Grandes Gueules. Nous sommes fières de mener de l’avant des projets et spectacles qui permettent de mettre en valeur la culture et le patrimoine vivant de Trois-Pistoles et ses environs.</p>
-                <a href="#" class="sub_section_link">En savoir plus</a>
+                <a href="" class="sub_section_link">En savoir plus</a>
         </div>
     </div>
         <div class="notre_mission_container">
             <div class="notre_mission_container_text">
                 <h3 class="h3-cursive mission_title sub_section_h3">notre mission</h3>
                 <p class="textblock-plus">Les Compagnons de la mise en valeur du patrimoine vivant de Trois-Pistoles est un organisme à but non lucratif qui a pour mission de voir à la préservation, la recherche, la mise en valeur et la diffusion du patrimoine vivant et plus particulièrement de la tradition orale.</p>
-                <a href="#" class="sub_section_link">En savoir plus</a>
+                <a href="" class="sub_section_link">En savoir plus</a>
             </div>
             <div class="notre_mission_container_imgs">
                 <img src="<?php bloginfo("template_url") ?>/images/spring_compagnons.png" alt="ressort" class="spring_compagnons">
@@ -40,14 +40,14 @@
             </div>
         </div>
         <div class="notre_histoire_container">
-            <div href="#" class="notre_histoire_container_imgs">
+            <div class="notre_histoire_container_imgs">
                 <img src="<?php bloginfo("template_url") ?>/images/Dawn_compagnons.png" alt="étoile" class="dawn_compagnons">
                 <img src="<?php bloginfo("template_url") ?>/images/cheval_compagnons.png" alt="photo de cheval" class="cheval_compagnons">
             </div>
             <div class="notre_histoire_container_text">
                 <h3 class="h3-cursive histoire_title sub_section_h3">notre histoire</h3>
                 <p class="textblock-plus">L’histoire débute avant même la fondation de l’organisme les Compagnons de la mise en valeur du patrimoine vivant de Trois-Pistoles. En 1997, l’équipe fondatrice travaille à l’organisation de spectacles et d’événements reliés au conte. La même année, elle lance la première édition du festival de contes et récits de la francophonie: le Rendez-vous des Grandes Gueules.</p>
-                <a href="#" class="sub_section_link">En savoir plus</a>
+                <a href="<?php echo get_home_url(); ?>/les_compagnons/notre_histoire/" class="sub_section_link">En savoir plus</a>
             </div>
         </div>
         <div class="nos_projets_container">
@@ -69,7 +69,7 @@
             <div class="nos_partenaires_container_text">
                 <h3 class="h3-cursive partenaires_title sub_section_h3">nos partenaires</h3>
                 <p class="textblock-plus">Merci à nos précieux partenaires!</p>
-                <a href="#" class="sub_section_link">En savoir plus</a>
+                <a href="<?php echo get_home_url(); ?>/nos-partenaires" class="sub_section_link">En savoir plus</a>
             </div>
         </div>
 </main>
