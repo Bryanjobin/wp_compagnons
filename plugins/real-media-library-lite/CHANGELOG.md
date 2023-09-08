@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.21.9 (2023-09-06)
+
+
+### chore
+
+* introduce empty i18n:generate:readme NPM script (CU-861n8mnx8)
+
+
+
+
+
 ## 4.21.8 (2023-08-28)
 
 

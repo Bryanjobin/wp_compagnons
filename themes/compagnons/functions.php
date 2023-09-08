@@ -50,6 +50,7 @@ add_action( 'init', function() {
     ) );
 } );
 
+
     //SETTING LOGO
 
     function logo_setup(){
