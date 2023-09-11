@@ -1,5 +1,8 @@
 header{
 	width: 100vw;
+	position: fixed;
+	top: 0;
+	left:0;
 }
 
 header span, header p, header a, header ul{
@@ -586,20 +589,20 @@ body {
 }
 
 .main_nav_menu_link_btn_title--mini{
-	font-size: 12px !important;
-}
-
-.main_nav_menu_link_btn_title2--mini{
 	font-size: 14px !important;
 }
 
+.main_nav_menu_link_btn_title2--mini{
+	font-size: 16px !important;
+}
+
 .main_nav_menu_link_btn--mini:hover .main_nav_menu_link_btn_title--mini,  .main_nav_menu_link_btn--mini:focus .main_nav_menu_link_btn_title--mini{
-	font-size: 12px !important;
+	font-size: 14px !important;
 
 }
 
 .main_nav_menu_link_btn--mini:hover .main_nav_menu_link_btn_title2--mini, .main_nav_menu_link_btn--mini:focus .main_nav_menu_link_btn_title2--mini{
-	font-size: 14px !important;
+	font-size: 16px !important;
 }
 
 .main_nav_menu_submenu--mini{

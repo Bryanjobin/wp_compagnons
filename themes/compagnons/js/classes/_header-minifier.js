@@ -1,12 +1,5 @@
 //MINIFIER LE HEADER AU SCROLL - DESKTOP (jquery)
-$.noConflict();
-jQuery(document).ready(function(){
-  jQuery("button").click(function(){
-jQuery("p").text("jQuery is still working!");
-  });
-});
-
-$(function() {
+jQuery(function($) {
     $(window).on("scroll", function() {
         if($(window).scrollTop() > 300) {
             $(".logo").addClass("logo--mini");
