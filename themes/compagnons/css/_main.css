@@ -3,7 +3,7 @@ main{
 }
 
 .main_content {
-    width: 100%;
+    max-width: 100%;
     background-color: white;
     padding: 50px 20px;
 }
@@ -17,6 +17,7 @@ main{
     body {
         background-image: url('../images/background_main.png');
         background-size: cover;
+        background-attachment: fixed;
     }
 
     .main_content{

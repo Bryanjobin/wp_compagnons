@@ -19,15 +19,15 @@
         </div>
         <!-- Contenu du main -->
         <section class="video_section">
-            <div class="video_container">
-                <img src="<?php bloginfo("template_url") ?>/images/video_dummy.png" class="video_element">
-            </div>
+                <video class="video_element" autoplay muted preload="auto"  loop=true>
+                    <source src="<?php bloginfo("template_url") ?>/images/video_rvgg_court.mp4">
+                </video>
+                <div class="video_banner">
+                    <h3 class="date-festival">27e ÉDITION DU 2 AU 8 OCTOBRE 2023</h3>
+                    <p class="annonce-prog">Restez à l’affût de la programmation!</p>
+                </div>
         </section>
-        <div class="video_banner">
-            <h3>27e ÉDITION DU 2 AU 8 OCTOBRE 2023</h3>
-            <p class="textblock">Restez à l’affût de la programmation!</p>
-        </div>
-        <div class="main_content accueil_main_content">
+        <div class="main_content main_content_rdv accueil_main_content">
             <div class="accueil_intro">
                 <p class="introduction textblock">Le Rendez-vous des Grandes Gueules est le festival de contes et de récits de la francophonie de Trois-Pistoles. Il se tient toutes les années au début du mois d’octobre. Le Rendez-vous présente annuellement une programmation de spectacles de contes et d’événements mettant à l’honneur les arts de la parole vivante. À chaque édition du festival, c’est une ambiance particulière qui transforme la ville de Trois-Pistoles, où tout le monde devient un peu artiste, acteur, conteuse, personnage, ami.e.s.</p>
                 <h3>Un festival pour découvrir des artistes du conte du Québec et d’ailleurs</h3>
@@ -41,19 +41,19 @@
                 <div class="accueil_icon_links_section_programmation">
                     <img src="<?php bloginfo("template_url") ?>/images/icone_accueil_programmation.jpg" alt="icone programmation">
                     <h3 class="h3">Programmation 2023</h3>
-                    <p class="textblock">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis.</p>
+                    <p class="textblock">Découvrez tous les spectacles et activités qui vous attendent pour cette édition!</p>
                     <a href="#">En savoir plus</a>
                 </div>
                 <div class="accueil_icon_links_section_lieux">
                     <img src="<?php bloginfo("template_url") ?>/images/icone_accueil_lieux.jpg" alt="icone lieux du festival">
                     <h3 class="h3">Lieux du festival</h3>
-                    <p class="textblock">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis.</p>
+                    <p class="textblock">Le Rendez-vous des Grandes Gueules se déroule principalement dans le coeur de Trois-Pistoles, mais saviez-vous qu'il s'épivarde aussi aux quatres coins du Bas-Saint-Laurent? Trouvez ici tous les détails concernant les lieux du festival!</p>
                     <a href="#">En savoir plus</a>
                 </div>
                 <div class="accueil_icon_links_section_artistes">
                     <img src="<?php bloginfo("template_url") ?>/images/icone_accueil_artistes.jpg" alt="icone_artiste">
                     <h3 class="h3">Artistes</h3>
-                    <p class="textblock">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis.</p>
+                    <p class="textblock">Faites connaissances avec les artistes qui participeront à cette édition du festival: conteurs, conteuses, mais aussi musicien·nes, animatrices et plus encore!</p>
                     <a href="#">En savoir plus</a>
                 </div>
             </div>
@@ -84,14 +84,14 @@
                 </div>
                 <div class="menterie_container_text">
                     <h3 class="h3-cursive mentir_green sub_section_h3">Savez-vous mentir?</h3>
-                    <p class="textblock-plus">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
+                    <p class="textblock-plus">Inscrivez-vous au Concours International de la plus Grande Menterie de Trois-Pistoles! Le concours est ouvert à tous et à toutes, avec ou sans expérience! </p>
                     <a href="#" class="sub_section_link">En savoir plus</a>
                 </div>
             </div>
             <div class="prix-jb_container">
                 <div class="prix-jb_container_text">
                     <h3 class="h3-cursive prix_green sub_section_h3">Prix Jocelyn Bérubé</h3>
-                    <p class="textblock-plus">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
+                    <p class="textblock-plus">Depuis 2006, le festival est clôturé par la remise de l'Oscar du conte à un personnage important du monde du conte. Apprenez-en plus sur son origine et sur les récipiendaires antérieurs!</p>
                     <a href="#" class="sub_section_link">En savoir plus</a>
                 </div>
                 <div class="prix-jb_container_imgs">
@@ -106,14 +106,14 @@
                 </div>
                 <div class="bavarde_container_text">
                     <h3 class="h3-cursive bavarde_green sub_section_h3">La Bavarde</h3>
-                    <p class="textblock-plus">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
+                    <p class="textblock-plus">Découvrez ici l'histoire de la bière officielle du festival, brassée par la microbrasserie pistoloise Le Caveau des Trois-Pistoles! </p>
                     <a href="<?php echo get_home_url(); ?>/la-bavarde" class="sub_section_link">En savoir plus</a>
                 </div>
             </div>
             <div class="responsable_container">
                 <div class="responsable_container_text">
                     <h3 class="h3-cursive responsable_green sub_section_h3">Vers un festival responsable</h3>
-                    <p class="textblock-plus">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
+                    <p class="textblock-plus">Il nous tient à coeur de toujours tendre vers un événment le plus écoresponsable possible. Apprenez en plus ici sur les actions prises par notre équipe pour réduire notre impact environnemental! </p>
                     <a href="#" class="sub_section_link">En savoir plus</a>
                 </div>
                 <div class="responsable_container_imgs">

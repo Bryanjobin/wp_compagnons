@@ -5,6 +5,7 @@ const body = document.querySelector('body');
 const filter = document.querySelector('.menu-filter');
 
 hamburgerBtn.addEventListener('click', () =>{
+    console.log('prout');
     if(hamburgerBtn.classList.contains("open")){
         hamburgerBtn.classList.remove("open");
         hamburgerMenu.classList.remove("header-container--open");
@@ -54,4 +55,3 @@ function closeOtherDropdowns(){
         chevron.innerHTML = "expand_more";
     })
 }
-
