@@ -1,4 +1,5 @@
 const pageProg = document.querySelector(".programmation");
+const progWidget = document.querySelector(".accueil_section_event");
 
 // SECTION PROGRAMMATION
 if (window.innerWidth >= 900) {
@@ -38,7 +39,6 @@ function widthChange() {
         if (windowWidth <= 599) {
             filtersBox.classList.remove('filtersBoxOn');
             filtersBox.classList.add('filtersBoxOff');
-
             filtersBtn.addEventListener('click', () =>{
                 const filtersBtnClose = document.querySelector('.box_top_button');
                 filtersBox.classList.remove('filtersBoxOff');
@@ -53,7 +53,6 @@ function widthChange() {
             filtersBox.classList.add('filtersBoxOn');
         }        
     }
-
 }
 
 widthChange();
@@ -69,56 +68,110 @@ if (filtersBox) {
     }
 }
 
-
 // FILTER MODE 
 const eventCards = document.querySelectorAll(".eventCard");
 const eventCardsArray = Array.from(eventCards);
 
-eventCards.forEach((eventCard) => {
-    const freeTag = eventCard.querySelector('.eventCard_tag_freeOption');
-    const famTag = eventCard.querySelector('.eventCard_tag_familialeOption');
-    if (freeTag.textContent === "1") {
-        freeTag.classList.remove('hidden');
-        freeTag.textContent = "Gratuit";
-    } else {
-        freeTag.classList.add('hidden');
+if (pageProg) {
+    eventCards.forEach((eventCard) => {
+        const freeTag = eventCard.querySelector('.eventCard_tag_freeOption');
+        const famTag = eventCard.querySelector('.eventCard_tag_familialeOption');
+        if (freeTag.textContent === "1") {
+            freeTag.classList.remove('hidden');
+            freeTag.textContent = "Gratuit";
+        } else {
+            freeTag.classList.add('hidden');
+        }
+    
+        if (famTag.textContent === "1") {
+            famTag.classList.remove('hidden');
+            famTag.textContent = "Familiale";
+        } else {
+            famTag.classList.add('hidden');
+        }
+    });
+    
+    
+    eventCardsArray.sort(function(a, b) {
+        const eventDateElementA = a.querySelector('.eventCard_tag_dataDate');
+        const eventDateElementB = b.querySelector('.eventCard_tag_dataDate');
+    
+        const eventDateStringA = eventDateElementA.textContent.trim().split('/');
+        const eventDateStringB = eventDateElementB.textContent.trim().split('/');
+    
+        const jourA = parseInt(eventDateStringA[0], 10);
+        const moisA = parseInt(eventDateStringA[1], 10) - 1;
+        const anneeA = parseInt(eventDateStringA[2], 10);
+    
+        const jourB = parseInt(eventDateStringB[0], 10);
+        const moisB = parseInt(eventDateStringB[1], 10) - 1;
+        const anneeB = parseInt(eventDateStringB[2], 10);
+    
+        const dateA = new Date(anneeA, moisA, jourA,);
+        const dateB = new Date(anneeB, moisB, jourB,);
+    
+        return dateA - dateB;
+    });
+}
+
+if (progWidget) {
+    eventCardsArray.sort(function(a, b) {
+        const eventDateElementA = a.querySelector('.eventCard_tag_dataDate');
+        const eventDateElementB = b.querySelector('.eventCard_tag_dataDate');
+
+        const eventDateStringA = eventDateElementA.textContent.trim().split('/');
+        const eventDateStringB = eventDateElementB.textContent.trim().split('/');
+
+        const jourA = parseInt(eventDateStringA[0], 10);
+        const moisA = parseInt(eventDateStringA[1], 10) - 1;
+        const anneeA = parseInt(eventDateStringA[2], 10);
+
+        const jourB = parseInt(eventDateStringB[0], 10);
+        const moisB = parseInt(eventDateStringB[1], 10) - 1;
+        const anneeB = parseInt(eventDateStringB[2], 10);
+
+        const dateA = new Date(anneeA, moisA, jourA);
+        const dateB = new Date(anneeB, moisB, jourB);
+
+        return dateA - dateB;
+    });
+
+    for (let i = 0; i < eventCardsArray.length; i++) {
+        const eventCard = eventCardsArray[i];
+        const freeTag = eventCard.querySelector('.eventCard_tag_freeOption');
+        const famTag = eventCard.querySelector('.eventCard_tag_familialeOption');
+        if (freeTag.textContent === "1") {
+            freeTag.classList.remove('hidden');
+            freeTag.textContent = "Gratuit";
+        } else {
+            freeTag.classList.add('hidden');
+        }
+
+        if (famTag.textContent === "1") {
+            famTag.classList.remove('hidden');
+            famTag.textContent = "Familiale";
+        } else {
+            famTag.classList.add('hidden');
+        }
+
+        if (i < 3) {
+            eventCard.classList.remove('hidden'); // Afficher les trois premières cartes
+        } else {
+            eventCard.classList.add('hidden'); // Masquer les autres cartes
+        }
     }
+}
 
-    if (famTag.textContent === "1") {
-        famTag.classList.remove('hidden');
-        famTag.textContent = "Familiale";
-    } else {
-        famTag.classList.add('hidden');
-    }
-});
-
-
-eventCardsArray.sort(function(a, b) {
-    const eventDateElementA = a.querySelector('.eventCard_tag_dataDate');
-    const eventDateElementB = b.querySelector('.eventCard_tag_dataDate');
-
-    const eventDateStringA = eventDateElementA.textContent.trim().split('/');
-    const eventDateStringB = eventDateElementB.textContent.trim().split('/');
-
-    const jourA = parseInt(eventDateStringA[0], 10);
-    const moisA = parseInt(eventDateStringA[1], 10) - 1;
-    const anneeA = parseInt(eventDateStringA[2], 10);
-
-    const jourB = parseInt(eventDateStringB[0], 10);
-    const moisB = parseInt(eventDateStringB[1], 10) - 1;
-    const anneeB = parseInt(eventDateStringB[2], 10);
-
-    const dateA = new Date(anneeA, moisA, jourA,);
-    const dateB = new Date(anneeB, moisB, jourB,);
-
-    return dateA - dateB;
-});
 
 const eventCardsContainer = document.querySelector('.programmation_cardBox');
+const eventCardWidgetContainer = document.querySelector('.accueil_section_event');
 
-eventCardsArray.forEach(function(card) {
-    eventCardsContainer.appendChild(card);
-});
+if (pageProg) {
+    eventCardsArray.forEach(function(card){
+        eventCardsContainer.appendChild(card);
+    });    
+}
+
 
 
 const freeCheckbox = document.getElementById("gratuit");
@@ -135,7 +188,6 @@ function filterCards() {
     let selectedDate = document.getElementById("date_event").value;
 
     let filterSearchInput = filterSearch.value.toLowerCase();
-
 
     if (selectedDate) {
         const dateParts = selectedDate.split("-");
