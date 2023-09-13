@@ -5,11 +5,7 @@
     align-items: center;
     justify-content: center;
 }
-
-
-
 /* --- bannière notre festival --- */
-
 
 .festival_banner p{
     margin: 0;
@@ -24,49 +20,46 @@
     width: 100%;
 }
 
-/* --- Accueil content --- */
-
-.main_content{
-    padding-top: 0;
-}
+/*---Vidéop---*/
 
 .video_section{
     width: 100%;
-    position: relative;
-}
-
-.video_container{
-    height: 100%;
 }
 
 .video_element{
     width: 100%;
 }
 
-.accueil_main_content{
-    margin-top:0;
-}
-
-.video_banner{
+.date-festival, .annonce-prog{
+    position: relative;
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
     color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    height: 130px;
+    text-align: center;
+    display: block;
+    z-index: 6;
+    margin: 0 20px;
+    padding: 12px 0;
 }
 
-.video_banner h3{
-    font-family: "Montserrat", sans-serif;
-    margin-top: 0;
-    margin-bottom: 8px;
-    text-align: center;
+.annonce-prog{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+
+/* --- Accueil content --- */
+
+.main_content_rdv{
+    padding:0 !important;
+    margin-top: 0 !important;
 }
 
 
 .accueil_intro{
-    padding: 50px 0px;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -322,6 +315,7 @@
     background-color: black;
     display: flex;
     justify-content: center;
+    padding: 30px 0;
 }
 
 .images_container img{
@@ -334,14 +328,6 @@
 
 
 @media screen and (min-width: 600px) {
-    .video_banner h3{
-        font-size: 22px;
-
-    }
-
-    .video_banner p{
-        font-size: 20px;
-    }
 
     .billetterie_banner p{
         font-size: 22px;
@@ -374,10 +360,27 @@
 
 
 @media screen and (min-width: 1200px) {
-    .video_section {
-        margin: 75px auto;
-        margin-bottom: 0;
-        width: 90%;
+    .main{
+        position: relative;
+    }
+
+    .main_content_rdv{
+        padding-top: 300px !important;
+        margin-top: 100px !important;
+    }
+
+    .video_section{
+        position: absolute;
+        top: 600px;
+        z-index: 5;
+        background-color: white;
+        clip-path: inset(10% 0 25% 0);
+
+    }
+    
+    .video_element{
+        width: 1201px;
+        clip-path: inset(10% 0 25% 0);
     }
 
     .introduction{
@@ -385,8 +388,22 @@
         line-height: 28px;
     }
 
-    .video_banner{
-        width: 90%;
+    .date-festival, .annonce-prog{
+        font-family: Montserrat, sans-serif;
+        font-size: 36px;
+        font-weight: 700;
+        color: white;
+        background-color: var(--festival);
+        text-align: left;
+        padding: 12px;
+        display: inline;
+        position: absolute;
+        top: 300px;
+    }
+
+    .annonce-prog{
+        font-size: 28px;
+        top: 400px;
     }
 
     .accueil_icon_links_section{
@@ -442,32 +459,18 @@
 
 @media screen and (min-width: 1500px) {
 
+
     .derniere_edition_imgs>p{
         position: absolute;
         top: -40px;
         left: 90px;
         transform: rotate(-3deg);
         width: 30%;
+        z-index: 5;
     }
 
-    
-
-    .main_content {
+    .main_content_rdv {
         max-width: 1200px;
-    }
-
-    .video_section {
-        max-width: 1200px;
-    }
-
-    .video_banner{
-        position: absolute;
-        z-index: 3;
-        top: 1000px;
-        left: auto;
-        transform: rotate(-3deg);
-        width: 95%;
-        max-width: 1800px;
     }
 
     .introduction{

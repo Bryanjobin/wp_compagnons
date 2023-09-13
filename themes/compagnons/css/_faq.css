@@ -5,3 +5,19 @@
 .faq_text {
     text-align: center;
 }
+
+.accordion_dropdown_content ul>li{
+    line-height: 25px;
+}
+
+@media screen and (min-width: 1500px){
+    .faq_main{
+        padding-top: 150px;
+        height: 1050px;
+        display: flex;
+    }
+
+    .faq_title_container{
+        padding-left: 140px;
+    }
+}

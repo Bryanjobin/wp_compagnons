@@ -15,10 +15,15 @@
     padding: 24px 12px;
 }
 
-.accordion_button:hover {
+.accordion_button:hover,
+.accordion_button:focus{
     padding-left: 22px;
     background-color: rgba(0, 0, 0, 0.131);
     transition:padding-left 0.3s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+.accordion_button:focus{
+    outline: none;
 }
 
 .accordion_button > p {

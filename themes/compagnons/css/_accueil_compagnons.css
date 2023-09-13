@@ -29,7 +29,7 @@
 .nos_partenaires_container{
     width: 90%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 40px;
 }
@@ -71,11 +71,19 @@
 
 @media screen and (min-width: 1200px){
     .accueil_compagnons_main{
+        padding: 25px 0;
         margin: 75px 0;
     }
 }
 
 @media screen and (min-width: 1500px) {
+    .notre_equipe_container,
+    .notre_mission_container,
+    .notre_histoire_container,
+    .nos_projets_container,
+    .nos_partenaires_container{
+        justify-content: space-between;
+}
     .notre_equipe_container_imgs,
     .notre_mission_container_imgs,
     .notre_histoire_container_imgs,

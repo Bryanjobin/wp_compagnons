@@ -40,7 +40,6 @@ body{
     --shadow-btn-cta: 0px 4px 10px 0px rgba(0, 0, 0, 0.25); 
 }
 
-
 /* --- Bannière mission --- */
 .mission_banner{
     background-color: var(--compagnons);
@@ -123,6 +122,7 @@ body{
     align-items: center;
     text-decoration: none;
     padding: 15px;
+    width: 100%;
 }
 
 .vdp_banner_left_img_container, .vdp_banner_right_img_container{
@@ -206,7 +206,7 @@ body{
     background-color: var(--vent);
     color: white;
     transition: 300ms;
-    cursor: pointer;
+    
 }
 
 .sub_btn:active{
