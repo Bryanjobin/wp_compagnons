@@ -83,6 +83,24 @@
             "append": ""
         },
         {
+            "key": "field_64f8c194899ff",
+            "label": "Date de l'événement (Pour la data)",
+            "name": "data_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "d\/m\/Y",
+            "first_day": 0
+        },
+        {
             "key": "field_64f775b5a224a",
             "label": "Lieu de l'événement",
             "name": "lieu",
@@ -251,24 +269,6 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
-        },
-        {
-            "key": "field_64f8c194899ff",
-            "label": "Date de l'événement (Pour la data)",
-            "name": "data_date",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "F j, Y",
-            "return_format": "F j, Y",
-            "first_day": 0
         }
     ],
     "location": [
@@ -289,5 +289,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1694024748
+    "modified": 1694451361
 }

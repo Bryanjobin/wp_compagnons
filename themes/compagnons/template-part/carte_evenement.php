@@ -12,7 +12,8 @@ $args = wp_parse_args($args, array(
     "image_alt" => '',
     "discipline" => '',
     "free_option" => '',
-    "familiale_option" => ''
+    "familiale_option" => '',
+    "data_date" => ''
 ));
 ?>
 
@@ -26,15 +27,16 @@ $args = wp_parse_args($args, array(
             <div class="eventCard_infoBox_info">
                 <div class="eventCard_infoBox_info_container">
                     <div class="eventCard_infoBox_info_container_placeNPrice">
-                            <p><?php echo $args['lieu']?></p>
-                        <p><?php echo $args['heure']?> / <?php echo $args['prix']?></p>
+                        <p class="eventCard_infoBox_info_container_lieu"><?php echo $args['lieu']?></p>
+                        <p class="eventCard_infoBox_info_container_placeNPrice_hour"><?php echo $args['heure']?> / <?php echo $args['prix']?></p>
                     </div>
                     <p  class="eventCard_infoBox_info_container_desc"><?php echo $args['desc']?></p>
                 </div>
-                <div class="hidden">
-                    <p class="eventCard_discipline">discipline = <?php echo $args['discipline']?></p>
-                    <p class="eventCard_freeOption">free = <?php echo $args['free_option']?></p>
-                    <p class="eventCard_familialeOption">familiale = <?php echo $args['familiale_option']?></p>
+                <div class="eventCard_tagBox">
+                    <p class="eventCard_tag_discipline hidden"><?php echo $args['discipline']?></p>
+                    <p class="eventCard_tag_freeOption hidden"><?php echo $args['free_option']?></p>
+                    <p class="eventCard_tag_familialeOption hidden"><?php echo $args['familiale_option']?></p>
+                    <p class="eventCard_tag_dataDate hidden"><?php echo $args['data_date']?></p>
                 </div>
                 <div class="eventCard_infoBox_info_buttonContainer">
                     <a class="eventCard_link" href="<?php echo $args['billeterie']?>" target="_blank"><button class="eventCard_infoBox_info_button btn-link bg-white">Acheter des billets<span class="material-symbols-outlined eventCard_infoBox_info_button_icon">arrow_right_alt</span></button></a>

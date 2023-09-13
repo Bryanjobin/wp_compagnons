@@ -1,93 +1,10 @@
-/*------------------------ SECTION FILTRES ------------------------ */
-.programmation_filters {
-    padding: 19px;
-}
-
-.programmation_filters_search {
-    display: flex;
-    align-items: center;
-    border-bottom: 3px solid rgba(0, 0, 0, 0.75);
-    margin: auto;
-}
-
-.programmation_filters_search_searchBox {
-    font-size: 1.2em;
-    font-weight: 400;
-    background-color: rgba(0, 0, 0, 0);
-    color: rgba(0, 0, 0, 0.75);
-    border: none;
-    height: 100%;
-    outline: none;
-    width: 100%;
-    padding: 8px;
-}
-
-.programmation_filters_search_icon > .material-symbols-outlined {
-    color: rgba(0, 0, 0, 0.75);
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 700,
-        'GRAD' 200,
-        'opsz' 48
-}
-
-.programmation_filters_bottom {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-
-}
-
-.programmation_filters_bottom_dateBox, .programmation_filters_bottom_disciplineBox {
-    width: 100%;
-    height: 40px;
-    border-bottom: 3px solid rgba(0, 0, 0, 0.75);
-}
-
-.programmation_filters_bottom_dateBox_input, .programmation_filters_bottom_disciplineBox_input {
-    width: 100%;
-    background-color: white;
-    border: none;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2em;
-    font-weight: 600;
-    color: black;
-    border-radius: 0;
-}
 
 
-.programmation_filters_bottom_dateBox_input {
-    height: 35px;
-}
-
-.programmation_filters_bottom_disciplineBox_input {
-    height: 40px;
-}
-
-
-.programmation_filters_checkBox, .programmation_filters_PcCheckBox {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 40px;
-    font-size: 1.2em;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-}
-
-.programmation_filters_PcCheckBox {
-    display: none;
-    min-width: 300px;
-    margin: 5px 10px;
-}
 
 /*------------------------ CONTAINER DE CARTES ------------------------*/
 .programmation_cardBox {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 /*------------------------ CARTES ------------------------*/
@@ -116,7 +33,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 97.5%;
     z-index: 1;
 }
 
@@ -127,6 +44,7 @@
     padding: 10px;
     font-weight: 600;
     padding-left: 5%;
+    transition: background-color 0.5s ease;
 }
 
 .eventCard_infoBox_date_date {
@@ -167,7 +85,8 @@
 
 .eventCard_infoBox_info_container_desc {
     width: 90%;
-    max-height: 200px;
+    height: 100%;
+    max-height: 150px;
     margin: auto;
     overflow-y: auto;
     display: none;
@@ -183,6 +102,7 @@
     justify-content: center;
     width: 100%;
     padding-bottom: 5px;
+    height: 60px;
 }
 
 .eventCard_infoBox_info_button {
@@ -191,13 +111,13 @@
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
-    font-size: 10px;
+    font-size: 12px;
     padding-left: 10px;
     background-color: white;
     border: none;
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 5px;
-    width: 100%;
+    width: 150px;
 }
 
 .eventCard_link {
@@ -238,10 +158,15 @@
     padding-left: 5%;
     background-color: black;
     color: white;
+    height: 48px;
 }
 
 .eventCard_titleBox > p {
     margin: 0;
+}
+
+.eventCard_tagBox {
+    display: none;
 }
 
 /*------------------------ HIDDEN ------------------------*/
@@ -249,33 +174,22 @@
     display: none;
 }
 
-@media screen and (min-width: 720px) {
-    .programmation_filters_checkBox {
-        display: none;
-    }
-
-    .programmation_filters_PcCheckBox {
-        display: flex;
-    }
-}
-
-
-
 @media screen and (min-width: 900px) {
+
     /* CARTES */
     .eventCard {
-        width: 300px;
-        max-width: 300px; /* GROSSEUR DES CARTES ICI SEULEMENT */
-        max-height: 475px;
+        width: 250px;
+        max-width: 250px; /* GROSSEUR DES CARTES ICI SEULEMENT */
     }
 
     .eventCard_infoBox{
         background-color: rgba(0, 0, 0, 0);
         transition: background-color 0.3s ease;
+        height: 355px;
     }
 
     .eventCard_infoBox_info {
-        margin: 15px 0px;
+        margin: 8px 0px;
         display: none;
         opacity: 0;
         transition: opacity 0.5s ease;
@@ -296,11 +210,12 @@
 
     .eventCard_infoBox_info_buttonContainer {
         background-color: rgba(0, 0, 0, 0);
+        max-height: 35px;
     }    
 
     .eventCard_infoBox_info_button {
         font-size: 20px;
-        width: 260px;
+        width: 245px;
     }
 
     .eventCard_infoBox_info_button > .material-symbols-outlined {
@@ -312,8 +227,12 @@
     }
 
     .eventCard_infoBox_info_button:hover {
-        padding: 10px;
-        transition: padding 0.1s ease-in-out;
+        padding: 6px;
+        transition: padding 0.5s ease-in-out;
+    }
+
+    .eventCard_infoBox_info_button:active {
+        transition: font-size 0.2s ease-in-out;
     }
 
     .eventCard_infoBox_date_date {
@@ -328,8 +247,8 @@
     }
 
     .eventCard_photoBox {
-        width: 300px;
-        height: 420px;
+        width: 250px;
+        height: 355px;
         overflow: hidden;
     }
 
@@ -338,5 +257,36 @@
         height: 100%;
         object-fit: cover;
         object-position: center;
+    }
+    .eventCard_infoBox_info_container_placeNPrice_lieu {
+        width: 230px;
+        padding-bottom: 10px;
+    }
+
+    .eventCard_titleBox {
+        height: fit-content;
+    }
+
+    .programmation {
+        min-height: 600px;
+        max-width: 1040px;
+    }
+}
+
+@media screen and (max-width: 899px) {
+    .eventCard {
+        height: 300px;
+    }
+
+    .eventCard_container {
+        height: 82%;
+    }
+
+    .eventCard_titleBox {
+        max-height: 38px;
+    }
+
+    .eventCard_infoBox {
+        height: 100%;
     }
 }
