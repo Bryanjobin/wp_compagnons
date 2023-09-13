@@ -29,7 +29,7 @@
                     <div class="laforgeaction_spectacles_text">
                         <h2 class="h2-cursive">Spectacles musicaux de L’Oeil de la tempête</h2>
                         <p class="textblock">Parmi les partenaires importants des Compagnons de Trois-Pistoles, l’organisme <a class="link" href="https://www.loeildelatempete.com/" target="_blank">L’Oeil de la tempête</a> produit chaque année plusieurs spectacles musicaux à la Forge à Bérubé! </p>
-                        <p class="textblock">Pour toutes questions concernant cette programmation, référez-vous directement à l’Oeil de la tempête. Vous pouvez également vous référer à la description de chaque événement dans le <a class="link" href="" target="_blank">calendrier de programmation</a>.</p>
+                        <p class="textblock">Pour toutes questions concernant cette programmation, référez-vous directement à l’Oeil de la tempête. Vous pouvez également vous référer à la description de chaque événement dans le <a class="link" href="<?php bloginfo("template_url") ?>/evenements_a_venir" target="_blank">calendrier de programmation</a>.</p>
                     </div>
                 </div>
                 <div class="laforgeaction_autres"> 

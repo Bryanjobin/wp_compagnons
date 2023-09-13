@@ -14,7 +14,7 @@
                     <p class="after_title">DE LA MISE EN VALEUR DU PATRIMOINE VIVANT DE TROIS-PISTOLES</p>
                 </div>
             </a>
-            <a href='' class="filiere_banner_forge">
+            <a href='<?php echo get_home_url(); ?>/accueil_forge' class="filiere_banner_forge">
                 <div class="forge_filiere_filter"></div>
                 <div class="filiere_banner_forge_titles_container">
                     <p class="prior_title">NOTRE SALLE</p>
@@ -28,7 +28,7 @@
                     <h2 class="h2 filiere_title">RENDEZ-VOUS DES GRANDES GEULES</h2>
                 </div>
             </a>
-            <a href="#" class="filiere_banner_vents">
+            <a href="<?php echo get_home_url(); ?>/accueil-vents-de-parole" class="filiere_banner_vents">
                 <div class="vents_filiere_filter"></div>
                 <div class="filiere_banner_vents_titles_container">
                     <p class="prior_title">NOTRE PROGRAMMATION ESTIVALE</p>
@@ -44,7 +44,7 @@
                     <p class="after_title">DE LA MISE EN VALEUR DU PATRIMOINE VIVANT DE TROIS-PISTOLES</p>
                 </div>
             </a>
-            <a href="#" class="link_banner_forge">
+            <a href="<?php echo get_home_url(); ?>/accueil_forge" class="link_banner_forge">
                 <div class="link_banner_titles_container">
                     <p class="prior_title">NOTRE SALLE</p>
                     <h2 class="h2 filiere_title">LA FORGE À BÉRUBÉ</h2>
@@ -56,7 +56,7 @@
                     <h2 class="h2 filiere_title">RENDEZ-VOUS DES GRANDES GEULES</h2>
                 </div>
             </a>
-            <a href="#" class="link_banner_vents">
+            <a href="<?php echo get_home_url(); ?>/accueil-vents-de-parole" class="link_banner_vents">
                 <div class="link_banner_titles_container">
                     <p class="prior_title">NOTRE PROGRAMMATION ESTIVALE</p>
                     <h2 class="h2 filiere_title">VENTS DE PAROLE</h2>
@@ -78,7 +78,7 @@
             <div class="images_container">
                 <?php echo do_shortcode('[smartslider3 slider="2"]'); ?> 
             </div>
-            <a href="#" class="galerie-link">Voir la galerie ➔</a>
+            <a href="<?php bloginfo("template_url") ?>/galerie_media" class="galerie-link">Voir la galerie ➔</a>
         </div>
     </main>
 
