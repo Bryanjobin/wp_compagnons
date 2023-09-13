@@ -8,7 +8,7 @@ jQuery(function($) {
       screenWidth = window.innerWidth;
 
       // Vérifie si la largeur de l'écran est supérieure ou égale à 1200px
-      if (screenWidth >= 1200) {
+      if (screenWidth >= 1400) {
           $(window).on("scroll", function() {
               if($(window).scrollTop() > 50) {
                   $(".logo").addClass("logo--mini");
