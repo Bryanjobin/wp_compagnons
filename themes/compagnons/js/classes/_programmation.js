@@ -5,53 +5,179 @@ if (window.innerWidth >= 900) {
     eventCards.forEach((eventCard) => {
         const eventCardInfoBox = eventCard.querySelector(".eventCard_infoBox");
         const eventCardInfoBoxContent = eventCard.querySelector(".eventCard_infoBox_info");
+        const eventCardInfoDate = eventCard.querySelector(".eventCard_infoBox_date");
         const eventCardDesc = eventCard.querySelector(".eventCard_infoBox_info_container_desc");
 
         eventCard.addEventListener("mouseenter", () => {
             eventCardInfoBoxContent.style.display = "flex";
             eventCardInfoBoxContent.style.opacity = "100";
             eventCardInfoBox.style.backgroundColor = "rgba(0, 0, 0, 0.787)";
+            eventCardInfoDate.style.backgroundColor = "rgba(0, 0, 0, 0)";
         });
 
         eventCard.addEventListener("mouseleave", () => {
             eventCardInfoBoxContent.style.display = "none";
             eventCardInfoBoxContent.style.opacity = "0";
             eventCardInfoBox.style.backgroundColor = "rgba(0, 0, 0, 0)";
+            eventCardInfoDate.style.backgroundColor = "rgba(0, 0, 0, 0.787)";
         });
     });
 }
 
-
-
-
 // INPUTS 
 // SEARCH
-const searchBox = document.querySelector('.programmation_filters_search');
-const searchInput = document.querySelector('.programmation_filters_search_searchBox');
-const searchInputIcon = document.querySelector('.programmation_filters_search_icon > .material-symbols-outlined');
+let windowWidth = window.innerWidth;
+const filtersBtn = document.querySelector('.programmation_filters_button_icon');
 
-searchInput.addEventListener('focusin', () => {
-    searchBox.style.borderColor = "black";
-    searchBox.style.padding = "12px";
-    searchInput.style.color = "black";
-    searchInputIcon.style.color = "black";
-    searchInputIcon.style.marginRight = "10px";
+function widthChange() {
+    const filtersBox = document.querySelector('.programmation_filters_box');
+    windowWidth = window.innerWidth;
 
-    searchBox.style.transition = "border-bottom 0.3s ease-in-out, padding 0.3s ease-in-out";
-    searchInput.style.transition = "color 0.3s ease-in-out";
-    searchInputIcon.style.transition = "color 0.3s ease-in-out, margin-right 0.3s ease-in-out";
+    if (windowWidth <= 599) {
+        filtersBox.classList.remove('filtersBoxOn');
+        filtersBox.classList.add('filtersBoxOff');
+
+        filtersBtn.addEventListener('click', () =>{
+            const filtersBtnClose = document.querySelector('.box_top_button');
+            filtersBox.classList.remove('filtersBoxOff');
+            filtersBox.classList.add('filtersBoxOn');
+            filtersBtnClose.addEventListener('click', () => {
+                filtersBox.classList.remove('filtersBoxOn');
+                filtersBox.classList.add('filtersBoxOff');
+            });
+        });
+    } else {
+        filtersBox.classList.remove('filtersBoxOff');
+        filtersBox.classList.add('filtersBoxOn');
+    }
+}
+
+widthChange();
+window.addEventListener('resize', widthChange);
+
+const filtersBox = document.querySelector('.programmation_filters_box');
+if (windowWidth <= 599) {
+    filtersBox.classList.add('filtersBoxOff');
+} else {
+    filtersBox.classList.add('filtersBoxOn');
+}
+
+// FILTER MODE 
+const eventCards = document.querySelectorAll(".eventCard");
+const eventCardsArray = Array.from(eventCards);
+
+eventCards.forEach((eventCard) => {
+    const freeTag = eventCard.querySelector('.eventCard_tag_freeOption');
+    const famTag = eventCard.querySelector('.eventCard_tag_familialeOption');
+    if (freeTag.textContent === "1") {
+        freeTag.classList.remove('hidden');
+        freeTag.textContent = "Gratuit";
+    } else {
+        freeTag.classList.add('hidden');
+    }
+
+    if (famTag.textContent === "1") {
+        famTag.classList.remove('hidden');
+        famTag.textContent = "Familiale";
+    } else {
+        famTag.classList.add('hidden');
+    }
 });
 
-searchInput.addEventListener('focusout', () => {
-    searchInput.style.color = "rgba(0, 0, 0, 0.75)";
-    searchInputIcon.style.color = "rgba(0, 0, 0, 0.75)";
-    searchInputIcon.style.marginRight = "0px";
-    searchBox.style.padding = "0px";
-    searchBox.style.borderColor = "rgba(0, 0, 0, 0.75)";
 
-    searchBox.style.transition = "border-bottom 0.3s ease-in-out, , padding 0.3s ease-in-out";
-    searchInput.style.transition = "color 0.3s ease-in-out";
-    searchInputIcon.style.transition = "color 0.3s ease-in-out, margin-right 0.3s ease-in-out";
+eventCardsArray.sort(function(a, b) {
+    const eventDateElementA = a.querySelector('.eventCard_tag_dataDate');
+    const eventDateElementB = b.querySelector('.eventCard_tag_dataDate');
+
+    const eventDateStringA = eventDateElementA.textContent.trim().split('/');
+    const eventDateStringB = eventDateElementB.textContent.trim().split('/');
+
+    const jourA = parseInt(eventDateStringA[0], 10);
+    const moisA = parseInt(eventDateStringA[1], 10) - 1;
+    const anneeA = parseInt(eventDateStringA[2], 10);
+
+    const jourB = parseInt(eventDateStringB[0], 10);
+    const moisB = parseInt(eventDateStringB[1], 10) - 1;
+    const anneeB = parseInt(eventDateStringB[2], 10);
+
+    const dateA = new Date(anneeA, moisA, jourA,);
+    const dateB = new Date(anneeB, moisB, jourB,);
+
+    return dateA - dateB;
 });
 
-// FILTER MODE
+const eventCardsContainer = document.querySelector('.programmation_cardBox');
+
+eventCardsArray.forEach(function(card) {
+    eventCardsContainer.appendChild(card);
+});
+
+
+const freeCheckbox = document.getElementById("gratuit");
+const familialCheckbox = document.getElementById("familial");
+const disciplineSelect = document.querySelector(".box_content_disciplineBox_input");
+
+// SEARCH BAR
+const filterSearch = document.querySelector('.programmation_filters_searchBar_input');
+
+
+function filterCards() {
+    const cards = document.querySelectorAll(".eventCard");
+    let selectedDate = document.getElementById("date_event").value;
+
+    let filterSearchInput = filterSearch.value.toLowerCase();
+    console.log(removeAccents(filterSearchInput));
+
+
+    if (selectedDate) {
+        const dateParts = selectedDate.split("-");
+        selectedDate = dateParts[2] + "/" + dateParts[1] + "/" + dateParts[0];
+    }
+
+    cards.forEach((card) => {
+        const freeTag = card.querySelector(".eventCard_tag_freeOption");
+        const familialTag = card.querySelector(".eventCard_tag_familialeOption");
+        const disciplineTag = card.querySelector(".eventCard_tag_discipline");
+        const eventDate = card.querySelector(".eventCard_tag_dataDate").textContent.trim();
+
+        const cardTextElements = Array.from(card.querySelectorAll('*'))
+            .filter(el => el.nodeType === Node.ELEMENT_NODE)
+            .map(el => el.textContent.trim().toLowerCase());
+
+        const cardText = removeAccents(cardTextElements.join(" ").toLowerCase());
+
+        const selectedDiscipline = disciplineSelect.value;
+
+        const showCard =
+            (!freeCheckbox.checked || (freeTag && freeTag.textContent === "Gratuit")) &&
+            (!familialCheckbox.checked || (familialTag && familialTag.textContent === "Familiale")) &&
+            (selectedDiscipline === "all" || (disciplineTag && disciplineTag.textContent === selectedDiscipline)) &&
+            (selectedDate === "" || eventDate === selectedDate) &&
+            (filterSearchInput === "" || cardText.includes(removeAccents(filterSearchInput)));
+            card.style.display = showCard ? "" : "none";
+        });
+}
+
+function removeAccents(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+document.getElementById("date_event").addEventListener("change", filterCards);
+filterSearch.addEventListener("input", filterCards);
+freeCheckbox.addEventListener("click", filterCards);
+familialCheckbox.addEventListener("click", filterCards);
+disciplineSelect.addEventListener("change", filterCards);
+
+filterCards();
+
+
+
+
+
+
+
+
+
+
+
+
