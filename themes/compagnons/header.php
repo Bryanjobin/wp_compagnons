@@ -41,7 +41,7 @@
             <div class="main_nav_container">
                 <nav class="main_nav">
                     <div class="main_nav_menu--compagnons dropdown">
-                        <a class="main_nav_menu_link dropdown_btn" href="#">
+                        <a class="main_nav_menu_link dropdown_btn btn_compagnons" href="#">
                             <button class="main_nav_menu_link_btn nav-compagnons">
                                 <div class="main_nav_menu_link_btn_titles">
                                     <p class="main_nav_menu_link_btn_title ">NOTRE ORGANISME</p>
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="main_nav_menu--forge dropdown">
-                        <a class="main_nav_menu_link dropdown_btn" href="#">
+                        <a class="main_nav_menu_link dropdown_btn btn_forge" href="#">
                             <button class="main_nav_menu_link_btn nav-forge">
                                 <div class="main_nav_menu_link_btn_titles">
                                     <p class="main_nav_menu_link_btn_title ">NOTRE SALLE</p>
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="main_nav_menu--festival dropdown">
-                        <a class="main_nav_menu_link dropdown_btn" href="#">
+                        <a class="main_nav_menu_link dropdown_btn btn_festival" href="#">
                             <button class="main_nav_menu_link_btn nav-festival">
                                 <div class="main_nav_menu_link_btn_titles">
                                     <p class="main_nav_menu_link_btn_title">LE RENDEZ-VOUS DES</p>
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     <div class="main_nav_menu--vents">
-                        <a class="main_nav_menu_link dropdown_btn" href="#">
+                        <a class="main_nav_menu_link dropdown_btn btn_vents" href="#">
                             <button class="main_nav_menu_link_btn nav-vents">
                                 <div class="main_nav_menu_link_btn_titles">
                                     <p class="main_nav_menu_link_btn_title ">NOTRE PROG' ESTIVAL</p>
