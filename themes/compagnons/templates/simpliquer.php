@@ -17,7 +17,7 @@
             </div>
         </div>
         <!-- Contenu du main -->
-        <div class="main_content_simpliquer simpliquer">
+        <div class="main_content main_content_simpliquer simpliquer">
             <section class="simpliquer_intro">
                 <p class="simpliquer_intro_textblock textblock-plus">
                     Si le festival repose sur le travail d’une équipe passionnée, le talent d’artistes à l’imagination débordante et le soutien de partenaires fidèles, il ne pourrait exister sans le soutien et la participation de la communauté. À chaque édition du Rendez-vous des Grandes Gueules, Trois-Pistoles s’anime d’une fébrilité particulière, alors que membres de l’équipe, du public et artistes se croisent dans les cafés et sur le trottoir, les yeux pleins d'étoiles et le cœur enchanté.
@@ -41,7 +41,7 @@
                     <button class="simpliquer_benevole_btn-sinscrire btn-cta black2blue"><span class="btn-default">S'inscrire</span></button>
                 </div>
                 <div class="simpliquer_benevole_img-fixed"></div>
-                <img class="simpliquer_benevole_img" src="<?php bloginfo("template_url") ?>/images/" alt="Bénévole - Crédit photo: Médérie Sauro">
+                <img class="simpliquer_benevole_img" src="<?php bloginfo("template_url") ?>/images/benevole.png" alt="Bénévole - Crédit photo: Médérie Sauro">
             </section>
             <section class="simpliquer_menterie">
                 <h3 class="simpliquer_menterie_title h2">Concours de la plus<br>grande menterie</h3>
@@ -105,7 +105,7 @@
                     <li class="aside_gagnants_liste_item textblock">2012: Jérôme Bérubé</li>
                 </ul>
             </div>
-            <img class="simpliquer_menterie_img" src="./images/trophee-menterie.png" alt="Trophée du concours de la plus grande menterie">
+            <img class="simpliquer_menterie_img" src="<?php bloginfo("template_url") ?>/images/trophee-menterie.png" alt="Trophée du concours de la plus grande menterie">
         </div>
         
     </main>
