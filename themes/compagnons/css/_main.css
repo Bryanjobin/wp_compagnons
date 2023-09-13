@@ -1,4 +1,6 @@
-
+main{
+    padding-top: 100px;
+}
 
 .main_content {
     width: 100%;
@@ -7,15 +9,20 @@
 }
 
 @media screen and (min-width: 1200px) {
+    main{
+        padding-top: 265px;
+        max-width: 100vw;
+    }
+
     body {
         background-image: url('../images/background_main.png');
         background-size: cover;
     }
+
     .main_content{
         margin: 75px auto;
         width: 90%;
         padding: 50px 20px;
-
     }
 }
 
