@@ -70,7 +70,7 @@
             </div>
             <div class="accueil_video_container">
             <video class="video_accueil" controls preload="auto">
-                    <source src="<?php bloginfo("template_url") ?>/images/video_rvgg_long.mp4">
+                    <source src="<?php bloginfo("template_url") ?>/images/video_rvgg_long_low-res.mp4">
             </video>
         </section>
         <div class="derniere_edition_imgs">
