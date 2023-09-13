@@ -39,7 +39,7 @@ $args = wp_parse_args($args, array(
                     <p class="eventCard_tag_dataDate hidden"><?php echo $args['data_date']?></p>
                 </div>
                 <div class="eventCard_infoBox_info_buttonContainer">
-                    <a class="eventCard_link" href="<?php echo $args['billeterie']?>" target="_blank"><button class="eventCard_infoBox_info_button btn-link bg-white">Acheter des billets<span class="material-symbols-outlined eventCard_infoBox_info_button_icon">arrow_right_alt</span></button></a>
+                    <a class="eventCard_link" href="<?php echo $args['billeterie']?>" target="_blank"><button class="eventCard_infoBox_info_button btn-link bg-white">Billetterie<span class="material-symbols-outlined eventCard_infoBox_info_button_icon">arrow_right_alt</span></button></a>
                 </div>
             </div>
         </div>

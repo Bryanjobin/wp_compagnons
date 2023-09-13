@@ -2,9 +2,23 @@
 
 
 /*------------------------ CONTAINER DE CARTES ------------------------*/
+.container_programmation_cardBox {
+    display: flex;
+    justify-content: center;
+}
+
 .programmation_cardBox {
     display: flex;
     flex-wrap: wrap;
+    width: 360px;
+}
+
+.programmation_main_corr {
+    width: 100%;
+}
+
+.programmation {
+    width: 100%;
 }
 
 /*------------------------ CARTES ------------------------*/
@@ -174,7 +188,22 @@
     display: none;
 }
 
+@media screen and (min-width: 540px) {
+    .programmation_cardBox {
+        width: 540px;
+    }
+}
+
+@media screen and (min-width: 720px) {
+    .programmation_cardBox {
+        width: 720px;
+    }
+}
+
 @media screen and (min-width: 900px) {
+    .programmation_cardBox {
+        width: 780px;
+    }
 
     /* CARTES */
     .eventCard {
@@ -268,12 +297,27 @@
     }
 
     .programmation {
-        min-height: 600px;
-        max-width: 1040px;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1040px) {
+    .programmation_cardBox {
+        width: 1040px;
+    }
+}
+
+@media screen and (min-width: 1040px) {
+    .programmation_cardBox {
+        width: 1040px;
     }
 }
 
 @media screen and (max-width: 899px) {
+    .programmation_main_corr {
+        padding: 0;
+    }
+
     .eventCard {
         height: 300px;
     }
