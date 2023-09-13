@@ -14,7 +14,7 @@
         </div>
     </div>
     <!-- Contenu du main -->
-    <div class="programmation_main main_content">
+    <div class="programmation_main_corr main_content">
             <div class="programmation">
                 <div class="programmation_filters">
                     <div class="programmation_filters_searchBar">

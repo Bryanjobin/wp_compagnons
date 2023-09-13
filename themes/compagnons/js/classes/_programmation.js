@@ -1,3 +1,5 @@
+const pageProg = document.querySelector(".programmation");
+
 // SECTION PROGRAMMATION
 if (window.innerWidth >= 900) {
     const eventCards = document.querySelectorAll(".eventCard");
@@ -32,35 +34,41 @@ const filtersBtn = document.querySelector('.programmation_filters_button_icon');
 function widthChange() {
     const filtersBox = document.querySelector('.programmation_filters_box');
     windowWidth = window.innerWidth;
+    if (filtersBox) {
+        if (windowWidth <= 599) {
+            filtersBox.classList.remove('filtersBoxOn');
+            filtersBox.classList.add('filtersBoxOff');
 
-    if (windowWidth <= 599) {
-        filtersBox.classList.remove('filtersBoxOn');
-        filtersBox.classList.add('filtersBoxOff');
-
-        filtersBtn.addEventListener('click', () =>{
-            const filtersBtnClose = document.querySelector('.box_top_button');
+            filtersBtn.addEventListener('click', () =>{
+                const filtersBtnClose = document.querySelector('.box_top_button');
+                filtersBox.classList.remove('filtersBoxOff');
+                filtersBox.classList.add('filtersBoxOn');
+                filtersBtnClose.addEventListener('click', () => {
+                    filtersBox.classList.remove('filtersBoxOn');
+                    filtersBox.classList.add('filtersBoxOff');
+                });
+            });
+        } else {
             filtersBox.classList.remove('filtersBoxOff');
             filtersBox.classList.add('filtersBoxOn');
-            filtersBtnClose.addEventListener('click', () => {
-                filtersBox.classList.remove('filtersBoxOn');
-                filtersBox.classList.add('filtersBoxOff');
-            });
-        });
-    } else {
-        filtersBox.classList.remove('filtersBoxOff');
-        filtersBox.classList.add('filtersBoxOn');
+        }        
     }
+
 }
 
 widthChange();
 window.addEventListener('resize', widthChange);
 
 const filtersBox = document.querySelector('.programmation_filters_box');
-if (windowWidth <= 599) {
-    filtersBox.classList.add('filtersBoxOff');
-} else {
-    filtersBox.classList.add('filtersBoxOn');
+
+if (filtersBox) {
+    if (windowWidth <= 599) {
+        filtersBox.classList.add('filtersBoxOff');
+    } else {
+        filtersBox.classList.add('filtersBoxOn');
+    }
 }
+
 
 // FILTER MODE 
 const eventCards = document.querySelectorAll(".eventCard");
@@ -119,14 +127,14 @@ const disciplineSelect = document.querySelector(".box_content_disciplineBox_inpu
 
 // SEARCH BAR
 const filterSearch = document.querySelector('.programmation_filters_searchBar_input');
-
+const dateSearch = document.querySelector('.box_content_dateBox_input');
 
 function filterCards() {
     const cards = document.querySelectorAll(".eventCard");
+
     let selectedDate = document.getElementById("date_event").value;
 
     let filterSearchInput = filterSearch.value.toLowerCase();
-    console.log(removeAccents(filterSearchInput));
 
 
     if (selectedDate) {
@@ -161,14 +169,31 @@ function filterCards() {
 function removeAccents(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
+if (dateSearch) {
+    dateSearch.addEventListener("change", filterCards);
+}
 
-document.getElementById("date_event").addEventListener("change", filterCards);
-filterSearch.addEventListener("input", filterCards);
-freeCheckbox.addEventListener("click", filterCards);
-familialCheckbox.addEventListener("click", filterCards);
-disciplineSelect.addEventListener("change", filterCards);
+if (filterSearch) {
+    filterSearch.addEventListener("input", filterCards);
+}
 
-filterCards();
+if (freeCheckbox) {
+    freeCheckbox.addEventListener("click", filterCards);
+}
+
+if (familialCheckbox) {
+    familialCheckbox.addEventListener("click", filterCards);
+}
+
+if (disciplineSelect) {
+    disciplineSelect.addEventListener("change", filterCards);
+}
+
+if (pageProg) {
+    filterCards();
+}
+
+
 
 
 
