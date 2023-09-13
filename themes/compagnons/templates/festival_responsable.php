@@ -56,7 +56,7 @@
             <p class="textblock">Au fil des éditions, nous tentons d’améliorer notre bilan environnemental et social. C’est un processus continu! Au plaisir d’en discuter avec vous!</p>
         </div>
         <div class="responsable_bottom_img_container">
-            <img src="<?php bloginfo("template_url") ?>/images/img_masquée.png" alt="photo de représentation à l'extérieur">
+            <img src="<?php bloginfo("template_url") ?>/images/img_masquee.png" alt="photo de représentation à l'extérieur">
         </div>
     </section>
 </main>

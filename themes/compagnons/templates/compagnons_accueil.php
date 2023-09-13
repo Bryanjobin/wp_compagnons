@@ -20,7 +20,7 @@
         <div class="notre_equipe_container">
             <div class="notre_equipe_container_imgs">
                 <img src="<?php bloginfo("template_url") ?>/images/Spiral_compagnons.png" alt="trait en spiral" class="spiral_compagnons">
-                <img src="<?php bloginfo("template_url") ?>/images/bérubé.png" alt="photo du forgeron Bérubé" class="forgeron_compagnons">
+                <img src="<?php bloginfo("template_url") ?>/images/berube.png" alt="photo du forgeron Bérubé" class="forgeron_compagnons">
             </div>
             <div class="notre_equipe_container_text">
                 <h3 class="h3-cursive equipe_title sub_section_h3">notre equipe</h3>
@@ -70,7 +70,7 @@
         <div class="nos_partenaires_container">
             <div class="nos_partenaires_container_imgs">
                 <img src="<?php bloginfo("template_url") ?>/images/Spiral_compagnons.png" alt="trait en spiral" class="spiral_compagnons_2">
-                <img src="<?php bloginfo("template_url") ?>/images/bérubé.png" alt="photo du forgeron Bérubé" class="forgeron_compagnons_2">
+                <img src="<?php bloginfo("template_url") ?>/images/berube.png" alt="photo du forgeron Bérubé" class="forgeron_compagnons_2">
             </div>
             <div class="nos_partenaires_container_text">
                 <h3 class="h3-cursive partenaires_title sub_section_h3">nos partenaires</h3>

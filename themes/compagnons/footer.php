@@ -6,7 +6,7 @@
     <div class="infolettre_banner">
         <div class="infolettre_banner_content_container">
             <div class="infolettre_banner_content_container_left_content">
-                <img src="<?php bloginfo("template_url"); ?> /images/infolettre_left_img.png" alt="personnages">
+                <img src="<?php bloginfo("template_url"); ?>/images/infolettre_left_img.png" alt="personnages">
             </div>
             <div class="infolettre_banner_content_container_mid_content">
                 <h3>NE MANQUEZ AUCUNE NOUVELLE!</h3>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="infolettre_banner_content_container_right_content">
-                <img src="<?php bloginfo("template_url"); ?> /images/infolettre_right_img.png" alt="Cheval">
+                <img src="<?php bloginfo("template_url"); ?>/images/infolettre_right_img.png" alt="Cheval">
             </div>
         </div>
     </div>

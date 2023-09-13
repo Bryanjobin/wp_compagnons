@@ -50,7 +50,7 @@
                 <div class="menterie_container vdp_events">
                     <div class="menterie_container_imgs">
                         <img src="<?php bloginfo("template_url") ?>/images/spiral.png" alt="trait en spiral" class="spiral">
-                        <img src="<?php bloginfo("template_url") ?>/images/bérubé.png" alt="photo du forgeron Bérubé" class="forgeron">
+                        <img src="<?php bloginfo("template_url") ?>/images/berube.png" alt="photo du forgeron Bérubé" class="forgeron">
                     </div>
                     <div class="menterie_container_text">
                         <h3 class="h3-cursive mentir_green sub_section_h3">Savez-vous mentir?</h3>
