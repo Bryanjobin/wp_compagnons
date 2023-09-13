@@ -63,11 +63,15 @@
                 </div>
             </a>
         </div>
-        <section class="accueil_video_container">
+        <section class="accueil_section_video">
             <div class="accueil_video_black_banner">
                 <h4 class="h4">RENDEZ-VOUS DES GRANDES GUEULES</h4>
                 <p class="textblock"><time datetime="2023">2023</time>, la 27e édition!</p>
             </div>
+            <div class="accueil_video_container">
+            <video class="video_accueil" controls preload="auto">
+                    <source src="<?php bloginfo("template_url") ?>/images/video_rvgg_long.mp4">
+            </video>
         </section>
         <div class="derniere_edition_imgs">
             <p class="les_meilleurs_moments">Les meilleurs moments de notre dernière édition</p>

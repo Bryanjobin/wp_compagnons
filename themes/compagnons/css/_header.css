@@ -1,8 +1,5 @@
 header{
 	width: 100vw;
-	position: fixed;
-	top: 0;
-	left:0;
 }
 
 header span, header p, header a, header ul{
@@ -331,6 +328,8 @@ body {
 	header{
 		position: fixed;
 		z-index: 10;
+		top: 0;
+		left:0;
 
 	}
 

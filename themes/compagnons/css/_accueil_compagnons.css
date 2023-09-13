@@ -71,6 +71,7 @@
 
 @media screen and (min-width: 1200px){
     .accueil_compagnons_main{
+        padding: 25px 0;
         margin: 75px 0;
     }
 }
