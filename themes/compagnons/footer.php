@@ -78,8 +78,8 @@
                         <h4>S'IMPLIQUER</h4>
                     </div>
                     <ul>
-                        <li><a href="<?php bloginfo("template_url") ?>/devenir_benevole">Devenir bénévole</a></li>
-                        <li><a href="<?php bloginfo("template_url") ?>/concours_menterie">S'inscrire au concours de la plus grande menterie</a></li>
+                        <li><a href="<?php bloginfo("template_url") ?>/simpliquer">Devenir bénévole</a></li>
+                        <li><a href="<?php bloginfo("template_url") ?>/simpliquer">S'inscrire au concours de la plus grande menterie</a></li>
                     </ul>
                 </div>
                 <div>
