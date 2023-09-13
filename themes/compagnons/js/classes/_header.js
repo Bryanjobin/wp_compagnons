@@ -30,7 +30,7 @@ dropdownBtn.forEach(button =>{
     let chevron = button.querySelector('span');
     let content = button.nextElementSibling;
     if(content){
-        if(window.innerWidth < 1200){
+        if(window.innerWidth < 1400){
             button.addEventListener('click', ()=>{
                 if(content.style.display !== "block"){
                 closeOtherDropdowns();
