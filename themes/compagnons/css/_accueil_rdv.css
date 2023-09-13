@@ -358,8 +358,26 @@
     }
 }
 
+@media screen and (min-width: 768px) {
 
-@media screen and (min-width: 1200px) {
+       .video_section{
+        width: 90%;
+        position: absolute;
+        top: 600px;
+        z-index: 5;
+        background-color: white;
+        clip-path: inset(10% 0 25% 0);
+
+    }
+    
+    .video_element{
+        width: 90%;
+        clip-path: inset(10% 0 25% 0);
+    } 
+}
+
+
+@media screen and (min-width: 1400px) {
     .main{
         position: relative;
     }
