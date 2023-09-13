@@ -35,6 +35,7 @@ body {
 
 .programmation_filters_searchBar_input:focus {
     padding: 10px;
+    font-size: 18px;
 }
 
 .programmation_filters_box {

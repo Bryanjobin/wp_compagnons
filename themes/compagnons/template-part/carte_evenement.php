@@ -17,7 +17,7 @@ $args = wp_parse_args($args, array(
 ));
 ?>
 
-<div class="eventCard">
+<div class="eventCard" tabindex="0">
     <div class="eventCard_container">
         <div class="eventCard_infoBox">
             <div class="eventCard_infoBox_date">
