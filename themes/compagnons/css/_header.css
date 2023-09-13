@@ -318,7 +318,7 @@ body {
 
 /*----PREMIER MÉDIA QUERY----*/
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1400px) {
 
 	*{
 		transition: 0.3s ease-in-out;
