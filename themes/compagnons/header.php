@@ -20,7 +20,7 @@
 </head>
     <body>
     <header class="">
-        <a href="<?php bloginfo("template_url") ?>/index/" aria-label="Accueil"><img class="logo" src="<?php echo $logo_src[0] ?>" alt="Logo Les Compagnons de la mise en valeur du patrimoine vivant"></a>
+        <a href="<?php bloginfo("template_url") ?>/accueil/" aria-label="Accueil"><img class="logo" src="<?php echo $logo_src[0] ?>" alt="Logo Les Compagnons de la mise en valeur du patrimoine vivant"></a>
         <div class="hamburger-menu-btn" id="nav-icon3">
                 <span></span>
                 <span></span>
@@ -41,7 +41,7 @@
             <div class="main_nav_container">
                 <nav class="main_nav">
                     <div class="main_nav_menu--compagnons dropdown">
-                        <a class="main_nav_menu_link dropdown_btn btn_compagnons" href="<?php bloginfo("template_url") ?>/accueil_compagnons/">
+                        <div class="main_nav_menu_link dropdown_btn btn_compagnons">
                             <button class="main_nav_menu_link_btn nav-compagnons">
                                 <div class="main_nav_menu_link_btn_titles">
                                     <p class="main_nav_menu_link_btn_title ">NOTRE ORGANISME</p>
@@ -51,7 +51,7 @@
                                     expand_more
                                 </span>
                             </button>
-                        </a>
+                        </div>
                         <div class="main_nav_menu_submenu compagnons dropdown_content dropdown_content--animated">
                             <a class="main_nav_menu_submenu_link" href="<?php bloginfo("template_url") ?>/compagnons_equipe/">
                                 <button class="main_nav_menu_submenu_link_btn nav-compagnons toplist"><span class="submenu-link">Notre équipe</span></button>  
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="main_nav_menu--forge dropdown">
-                        <a class="main_nav_menu_link dropdown_btn btn_forge" href="<?php bloginfo("template_url") ?>/accueil_forge/">
+                        <div class="main_nav_menu_link dropdown_btn btn_forge">
                             <button class="main_nav_menu_link_btn nav-forge">
                                 <div class="main_nav_menu_link_btn_titles">
                                     <p class="main_nav_menu_link_btn_title ">NOTRE SALLE</p>
@@ -81,7 +81,7 @@
                                     expand_more
                                 </span>
                             </button>
-                        </a>
+                        </div>
                         <div class="main_nav_menu_submenu dropdown_content dropdown_content--animated">
                             <a class="main_nav_menu_submenu_link" href="https://lepointdevente.com/les-compagnons-de-la-mise-en-valeur-du-patrimoine-vivant-de-troi">
                                 <button class="main_nav_menu_submenu_link_btn nav-forge toplist"><span class="submenu-link">Billetterie</span></button>
@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="main_nav_menu--festival dropdown">
-                        <a class="main_nav_menu_link dropdown_btn btn_festival" href="<?php bloginfo("template_url") ?>/accueil_RVGG/">
+                        <div class="main_nav_menu_link dropdown_btn btn_festival">
                             <button class="main_nav_menu_link_btn nav-festival">
                                 <div class="main_nav_menu_link_btn_titles">
                                     <p class="main_nav_menu_link_btn_title">LE RENDEZ-VOUS DES</p>
@@ -106,7 +106,7 @@
                                     expand_more
                                 </span>
                             </button>
-                        </a>
+                        </div>
                         <div class="main_nav_menu_submenu dropdown_content">
                             <a class="main_nav_menu_submenu_link" href="<?php bloginfo("template_url") ?>/evenements_a_venir/" target="">
                                 <button class="main_nav_menu_submenu_link_btn nav-festival toplist"><span class="submenu-link">Programmation 2023</span></button>
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     <div class="main_nav_menu--vents">
-                        <a class="main_nav_menu_link dropdown_btn btn_vents" href="<?php bloginfo("template_url") ?>/accueil_vents-de-paroles/">
+                        <a class="main_nav_menu_link dropdown_btn btn_vents" href="<?php echo get_home_url(); ?>/accueil-vents-de-parole">
                             <button class="main_nav_menu_link_btn nav-vents">
                                 <div class="main_nav_menu_link_btn_titles">
                                     <p class="main_nav_menu_link_btn_title ">NOTRE PROG' ESTIVAL</p>
