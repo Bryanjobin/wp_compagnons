@@ -80,7 +80,7 @@
                     <div class="benevole_section_banner_green_content">
                         <h3 class="h3">Implique toi en devenant bénévole!</h3>
                     </div>
-                    <a href="<?php bloginfo("template_url") ?>/devenir_benevole" class="sub_section_link">En savoir plus ➔</a>
+                    <a href="<?php bloginfo("template_url") ?>/simpliquer" class="sub_section_link">En savoir plus ➔</a>
                 </div>
             </div>
             <div class="menterie_container">
@@ -91,7 +91,7 @@
                 <div class="menterie_container_text">
                     <h3 class="h3-cursive mentir_green sub_section_h3">Savez-vous mentir?</h3>
                     <p class="textblock-plus">Inscrivez-vous au Concours International de la plus Grande Menterie de Trois-Pistoles! Le concours est ouvert à tous et à toutes, avec ou sans expérience! </p>
-                    <a href="#" class="sub_section_link">En savoir plus</a>
+                    <a href="<?php bloginfo("template_url") ?>/simpliquer" class="sub_section_link">En savoir plus</a>
 
                 </div>
             </div>
@@ -100,7 +100,7 @@
                     <h3 class="h3-cursive prix_green sub_section_h3">Prix Jocelyn Bérubé</h3>
 
                     <p class="textblock-plus">Depuis 2006, le festival est clôturé par la remise de l'Oscar du conte à un personnage important du monde du conte. Apprenez-en plus sur son origine et sur les récipiendaires antérieurs!</p>
-                    <a href="#" class="sub_section_link">En savoir plus</a>
+                    <a href="<?php bloginfo("template_url") ?>/prix_jocelyn_berube" class="sub_section_link">En savoir plus</a>
 
                 </div>
                 <div class="prix-jb_container_imgs">
