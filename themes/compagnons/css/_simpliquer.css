@@ -1,5 +1,5 @@
 .simpliquer_intro, .simpliquer_benevole_textblock, .simpliquer_menterie_textblock, .simpliquer_menterie_sous-titre, .simpliquer_menterie_accordion_panel{
-    padding: 0 20px;
+    padding: 0 20px !important;
 }
 
 .simpliquer_intro{
@@ -67,8 +67,6 @@
     border: none;
 }
 
-
-
 .simpliquer_menterie_accordion_panel{
     background-color: var(--festival);
     padding: 12px;
@@ -88,12 +86,12 @@
 .aside_gagnants{
     display: grid !important;
     grid-template-columns: 0.8fr 1fr;
-    grid-template-rows: 1fr 175px;
+    grid-template-rows: 1fr 200px;
     background-color: var(--festival);
     color: white;
     width: 100%;
-    display:block;
-    margin: 0 auto;
+    height: fit-content;
+    margin: 0;
     position: relative;
     padding: 20px;
 }
@@ -124,7 +122,11 @@
     display: none;
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1400px) {
+
+    .main_content_simpliquer{
+        max-height: 2500px;
+    }
     
     .simpliquer_intro {
         width: 100%;
@@ -185,7 +187,7 @@
         grid-template-rows: 1fr 175px;
         background-color: var(--festival);
         color: white;
-        width: 80vw;
+        width: 1300px;
         display:block;
         margin: 0 auto;
         position: relative;
@@ -213,7 +215,7 @@
         position: relative;
         height: 500px;
         top:-700px;
-        right: -800px;
+        right: -400px;
     }
 
 }
