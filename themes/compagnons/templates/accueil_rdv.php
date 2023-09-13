@@ -42,19 +42,19 @@
                     <img src="<?php bloginfo("template_url") ?>/images/icone_accueil_programmation.jpg" alt="icone programmation">
                     <h3 class="h3">Programmation 2023</h3>
                     <p class="textblock">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis.</p>
-                    <a href="#">En savoir plus</a>
+                    <a href="<?php bloginfo("template_url") ?>/evenements_a_venir">En savoir plus</a>
                 </div>
                 <div class="accueil_icon_links_section_lieux">
                     <img src="<?php bloginfo("template_url") ?>/images/icone_accueil_lieux.jpg" alt="icone lieux du festival">
                     <h3 class="h3">Lieux du festival</h3>
                     <p class="textblock">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis.</p>
-                    <a href="#">En savoir plus</a>
+                    <a href="<?php bloginfo("template_url") ?>/lieux_du_festival">En savoir plus</a>
                 </div>
                 <div class="accueil_icon_links_section_artistes">
                     <img src="<?php bloginfo("template_url") ?>/images/icone_accueil_artistes.jpg" alt="icone_artiste">
                     <h3 class="h3">Artistes</h3>
                     <p class="textblock">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis.</p>
-                    <a href="#">En savoir plus</a>
+                    <a href="<?php bloginfo("template_url") ?>/artistes">En savoir plus</a>
                 </div>
             </div>
             <div class="section_billetterie">
@@ -74,7 +74,7 @@
                     <div class="benevole_section_banner_green_content">
                         <h3 class="h3">Implique toi en devenant bénévole!</h3>
                     </div>
-                    <a href="#" class="sub_section_link">En savoir plus ➔</a>
+                    <a href="<?php bloginfo("template_url") ?>/devenir_benevole" class="sub_section_link">En savoir plus ➔</a>
                 </div>
             </div>
             <div class="menterie_container">
@@ -85,14 +85,14 @@
                 <div class="menterie_container_text">
                     <h3 class="h3-cursive mentir_green sub_section_h3">Savez-vous mentir?</h3>
                     <p class="textblock-plus">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
-                    <a href="#" class="sub_section_link">En savoir plus</a>
+                    <a href="<?php bloginfo("template_url") ?>/concours_menterie" class="sub_section_link">En savoir plus</a>
                 </div>
             </div>
             <div class="prix-jb_container">
                 <div class="prix-jb_container_text">
                     <h3 class="h3-cursive prix_green sub_section_h3">Prix Jocelyn Bérubé</h3>
                     <p class="textblock-plus">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
-                    <a href="#" class="sub_section_link">En savoir plus</a>
+                    <a href="<?php bloginfo("template_url") ?>/prix_jocelyn_berube" class="sub_section_link">En savoir plus</a>
                 </div>
                 <div class="prix-jb_container_imgs">
                     <img src="<?php bloginfo("template_url") ?>/images/spring.png" alt="ressort" class="spring">
@@ -114,7 +114,7 @@
                 <div class="responsable_container_text">
                     <h3 class="h3-cursive responsable_green sub_section_h3">Vers un festival responsable</h3>
                     <p class="textblock-plus">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
-                    <a href="#" class="sub_section_link">En savoir plus</a>
+                    <a href="<?php echo get_home_url(); ?>/festival-responsable/" class="sub_section_link">En savoir plus</a>
                 </div>
                 <div class="responsable_container_imgs">
                     <img src="<?php bloginfo("template_url") ?>/images/Spiral_inversed.png" alt="ressort" class="inversed_spiral">
@@ -124,9 +124,9 @@
             <div class="derniere_edition_imgs">
                 <p class="les_meilleurs_moments">Les meilleurs moments de notre dernière édition</p>
                 <div class="images_container">
-                    <?php echo do_shortcode('[smartslider3 slider="2"]'); ?> 
+                <?php echo do_shortcode('[smartslider3 slider="4"]');?>  
                 </div>
-                <a href="#">Voir la galerie ➔</a>
+                <a href="<?php bloginfo("template_url") ?>/gallerie_media">Voir la galerie ➔</a>
             </div>
     </main>
 

@@ -25,14 +25,14 @@
             <div class="notre_equipe_container_text">
                 <h3 class="h3-cursive equipe_title sub_section_h3">notre equipe</h3>
                 <p class="textblock-plus">Les Compagnons, c’est une petite équipe toute l’année, qui s’agrandit au moment de préparer son festival de contes et récits le Rendez-vous des Grandes Gueules. Nous sommes fières de mener de l’avant des projets et spectacles qui permettent de mettre en valeur la culture et le patrimoine vivant de Trois-Pistoles et ses environs.</p>
-                <a href="" class="sub_section_link">En savoir plus</a>
+                <a href="<?php bloginfo("template_url") ?>/compagnons_equipe" class="sub_section_link">En savoir plus</a>
         </div>
     </div>
         <div class="notre_mission_container">
             <div class="notre_mission_container_text">
                 <h3 class="h3-cursive mission_title sub_section_h3">notre mission</h3>
                 <p class="textblock-plus">Les Compagnons de la mise en valeur du patrimoine vivant de Trois-Pistoles est un organisme à but non lucratif qui a pour mission de voir à la préservation, la recherche, la mise en valeur et la diffusion du patrimoine vivant et plus particulièrement de la tradition orale.</p>
-                <a href="" class="sub_section_link">En savoir plus</a>
+                <a href="<?php bloginfo("template_url") ?>/notre_mission" class="sub_section_link">En savoir plus</a>
             </div>
             <div class="notre_mission_container_imgs">
                 <img src="<?php bloginfo("template_url") ?>/images/spring_compagnons.png" alt="ressort" class="spring_compagnons">
@@ -53,8 +53,9 @@
         <div class="nos_projets_container">
             <div class="nos_projets_container_text">
                 <h3 class="h3-cursive projets_title sub_section_h3">nos projets</h3>
-                <p class="textblock-plus">Consultez nos projet en cours et passés.</p>
-                <a href="#" class="sub_section_link">En savoir plus</a>
+                <p class="textblock-plus">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
+                <a href="<?php bloginfo("template_url") ?>/nos_projets" class="sub_section_link">En savoir plus</a>
             </div>
             <div class="nos_projets_container_imgs">
                 <img src="<?php bloginfo("template_url") ?>/images/Spiral_inversed_compagnons.png" alt="ressort" class="inversed_spiral_compagnons">
@@ -68,7 +69,8 @@
             </div>
             <div class="nos_partenaires_container_text">
                 <h3 class="h3-cursive partenaires_title sub_section_h3">nos partenaires</h3>
-                <p class="textblock-plus">Merci à nos précieux partenaires!</p>
+                <p class="textblock-plus">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis tincidunt urna. In iaculis in ipsum id convallis. Aenean in velit lectus. Aenean placerat lorem non ante </p>
                 <a href="<?php echo get_home_url(); ?>/nos-partenaires" class="sub_section_link">En savoir plus</a>
             </div>
         </div>
